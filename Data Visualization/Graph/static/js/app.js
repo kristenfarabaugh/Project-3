@@ -1,6 +1,6 @@
 console.log(data)
 
-let dropdownMenu = d3.select("selDataset");
+let dropdownMenu = d3.select("#selDataset2");
 
 //for each item in data
 for (i =0; i < data.length; i++) {
@@ -11,8 +11,6 @@ for (i =0; i < data.length; i++) {
     //Append the text and the value
     newOption.text = data[i].parkName;
     newOption.value = data[i].parkName;
-
-    console.log(newOption)
 
     //Append this as a child function into the list
     dropdownMenu.node().appendChild(newOption);
@@ -28,12 +26,12 @@ console.log(months)
  let Trace1 = {
  x: months,
  y: monthlyVisitors[0],
- type: "bar",
+ type: "line",
  //text: monthlyVisitors[0]
 };
 
 // Data array
-let barGraphData = [Trace1];
+let lineGraphData = [Trace1];
 
 // Apply titles to the layout
 let layout = {
@@ -45,7 +43,7 @@ let layout = {
 
 
 // Render the plot to the div tag with id "bar" since that's the name in the html file
-Plotly.newPlot("bar", barGraphData, layout);  
+Plotly.newPlot("bar", lineGraphData, layout);  
 
 //     ///// ADDING ALL THE NAMES TO THE HTML FILE: /////
 
