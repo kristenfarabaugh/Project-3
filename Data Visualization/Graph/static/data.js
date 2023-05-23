@@ -18,7 +18,7 @@ let data = [
   parkDesignation: 'National Historical Park',
   monthlyVisitors: [84, 125, 204, 262, 1343, 2109, 2041, 1876, 1811, 2207, 425, 361],
   total2022Visitors: 12848,
-  yelpRating: 1.0 //This is made up!
+  yelpRating: NaN //This is made up!
 },
 {
   parkName: "African American Civil War Memorial",
