@@ -15,20 +15,28 @@ let baseMaps = {
 };
 
 function selectPark(park) {
-  return park.Designation == "National Park"
+  return park.Designation == "National Park" || park.Designation == "National Historical Park" || park.Designation == "National Park & Preserve"
 }
 function selectMonument(park) {
   return park.Designation == "National Monument"
 }
-function selectRiver(park) {
-  return park.Designation == "National Wild and Scenic River" || park.Designation == "National River" || park.Designation == "National Scenic River" || park.Designation == "Wild River"
+function selectHistoricSites(park) {
+  return park.Designation == "National Historic Site"
+}
+function selectMemorials(park) {
+    return park.Designation == "National Memorial"
+}
+function selectRecreation(park) {
+  return park.Designation == "National Recreation Area"
 }
 
 let nationalParks = data.filter(selectPark);
 let nationalMonuments = data.filter(selectMonument);
-let nationalRivers = data.filter(selectRiver);
+let nationalHistoricSites = data.filter(selectHistoricSites);
+let nationalMemorials = data.filter(selectMemorials);
+let nationalRecreation = data.filter(selectRecreation);
 
-console.log(nationalRivers)
+
 //Options of remaining National Parks
       //'National Wild & Scenic River', 
       // 'National Preserve', 'National Historical Park',
@@ -52,9 +60,9 @@ for (let i = 0; i < nationalParks.length; i++) {
         fillColor: "green",
         weight: 0.1,
         fillOpacity: 0.5,
-        radius: 50000
+        radius: Math.sqrt(park.totalVisitors2022*5000)
     })
-        .bindPopup(`<h3>${park.Name}</h3><hr><h4>Designation: ${park.Designation}</h4>`);
+    .bindPopup(`<h3>${park.Park}</h3><hr><h4>Number of Visitors in 2022: ${park.totalVisitors2022}</h4><hr><h5>Entrance Fee: ${park.entranceFee}</h5><h5>Entrance Fee Info: ${park.entranceFeeDesc}</h5>`);
     
     //Add each "circle" info to the nationalParkCircles array
     nationalParkCircles.push(circle);
@@ -69,24 +77,24 @@ for (let i = 0; i < nationalMonuments.length; i++) {
 
   //Create the circle information - eventually we want radius to be visitor numbers
   let circle = L.circle([park.Latitude, park.Longitude], {
-      color: "gray",
-      fillColor: "gray",
+      color: "brown",
+      fillColor: "brown",
       weight: 0.1,
       fillOpacity: 0.5,
-      radius: 50000
+      radius: Math.sqrt(park.totalVisitors2022*5000)
   })
-      .bindPopup(`<h3>${park.Name}</h3><hr><h4>Designation: ${park.Designation}</h4>`);
+      .bindPopup(`<h3>${park.Park}</h3><hr><h4>Number of Visitors in 2022: ${park.totalVisitors2022}</h4><hr><h5>Entrance Fee: ${park.entranceFee}</h5><h5>Entrance Fee Info: ${park.entranceFeeDesc}</h5>`);
   
   //Add each "circle" info to the nationalParkCircles array
   nationalMonumentCircles.push(circle);
 }
 
 //Initialize an empty array to store the national Park circle data
-let nationalRiverCircles = [];
+let nationalHistoricSitesCircles = [];
 
 //Run through the list of dictionaries (this is called data in the park_info.js file)
-for (let i = 0; i < nationalRivers.length; i++) {
-  let park = nationalRivers[i];
+for (let i = 0; i < nationalHistoricSites.length; i++) {
+  let park = nationalHistoricSites[i];
 
   //Create the circle information - eventually we want radius to be visitor numbers
   let circle = L.circle([park.Latitude, park.Longitude], {
@@ -94,14 +102,55 @@ for (let i = 0; i < nationalRivers.length; i++) {
       fillColor: "blue",
       weight: 0.1,
       fillOpacity: 0.5,
-      radius: 50000
+      radius: Math.sqrt(park.totalVisitors2022*5000)
   })
-      .bindPopup(`<h3>${park.Name}</h3><hr><h4>Designation: ${park.Designation}</h4>`);
+      .bindPopup(`<h3>${park.Park}</h3><hr><h4>Number of Visitors in 2022: ${park.totalVisitors2022}</h4><hr><h5>Entrance Fee: ${park.entranceFee}</h5><h5>Entrance Fee Info: ${park.entranceFeeDesc}</h5>`);
   
   //Add each "circle" info to the nationalParkCircles array
-  nationalRiverCircles.push(circle);
+  nationalHistoricSitesCircles.push(circle);
 }
 
+//Initialize an empty array to store the national Park circle data
+let nationalMemorialsCircles = [];
+
+//Run through the list of dictionaries (this is called data in the park_info.js file)
+for (let i = 0; i < nationalMemorials.length; i++) {
+  let park = nationalMemorials[i];
+
+  //Create the circle information - eventually we want radius to be visitor numbers
+  let circle = L.circle([park.Latitude, park.Longitude], {
+      color: "purple",
+      fillColor: "purple",
+      weight: 0.1,
+      fillOpacity: 0.5,
+      radius: Math.sqrt(park.totalVisitors2022*5000)
+  })
+  .bindPopup(`<h3>${park.Park}</h3><hr><h4>Number of Visitors in 2022: ${park.totalVisitors2022}</h4><hr><h5>Entrance Fee: ${park.entranceFee}</h5><h5>Entrance Fee Info: ${park.entranceFeeDesc}</h5>`);
+  
+  //Add each "circle" info to the nationalParkCircles array
+  nationalMemorialsCircles.push(circle);
+}
+
+//Initialize an empty array to store the national Park circle data
+let nationalRecreationCircles = [];
+
+//Run through the list of dictionaries (this is called data in the park_info.js file)
+for (let i = 0; i < nationalRecreation.length; i++) {
+  let park = nationalRecreation[i];
+
+  //Create the circle information - eventually we want radius to be visitor numbers
+  let circle = L.circle([park.Latitude, park.Longitude], {
+      color: "yellow",
+      fillColor: "yellow",
+      weight: 0.1,
+      fillOpacity: 0.5,
+      radius: Math.sqrt(park.totalVisitors2022*5000)
+  })
+  .bindPopup(`<h3>${park.Park}</h3><hr><h4>Number of Visitors in 2022: ${park.totalVisitors2022}</h4><hr><h5>Entrance Fee: ${park.entranceFee}</h5><h5>Entrance Fee Info: ${park.entranceFeeDesc}</h5>`);
+  
+  //Add each "circle" info to the nationalParkCircles array
+  nationalRecreationCircles.push(circle);
+}
 
 //Initialize an empty array to store the national Park circle data
 let allCircles = [];
@@ -112,19 +161,7 @@ for (let i = 0; i < data.length; i++) {
 
     //Set the color based on the Designation of the park
     //let designation = park.Designation;
-    let color = "yellow";
-
-    // if (designation == "National Park") {
-    //     color = "green";
-    // } else if (designation == "National Wild & Scenic River") {
-    //     color = "lightblue";
-    // } else if (designation == "National Monument") {
-    //     color = "white";
-    // } else if (designation == "National Preserve") {
-    //     color = "yellow";
-    // } else {
-    //     color = "gray";
-    // }
+    let color = "gray";
 
     //Create the circle information - eventually we want radius to be visitor numbers
     let circle = L.circle([park.Latitude, park.Longitude], {
@@ -132,9 +169,9 @@ for (let i = 0; i < data.length; i++) {
         weight: 0.1,
         fillColor: color,
         fillOpacity: 0.25,
-        radius: 50000
+        radius: Math.sqrt(park.totalVisitors2022*5000)
     })
-        .bindPopup(`<h3>${park.Name}</h3><hr><h4>Designation: ${park.Designation}</h4>`);
+    .bindPopup(`<h3>${park.Park}</h3><hr><h4>Number of Visitors in 2022: ${park.totalVisitors2022}</h4><hr><h5>Entrance Fee: ${park.entranceFee}</h5><h5>Entrance Fee Info: ${park.entranceFeeDesc}</h5>`);
     
     //Add each "circle" info to the allCircles array
     allCircles.push(circle);
@@ -146,7 +183,9 @@ let overlayMaps = {
     "All National Lands": L.layerGroup(allCircles),
     "National Parks": L.layerGroup(nationalParkCircles),
     "National Monuments": L.layerGroup(nationalMonumentCircles),
-    "National Rivers": L.layerGroup(nationalRiverCircles)
+    "National Historic Sites": L.layerGroup(nationalHistoricSitesCircles),
+    "National Memorials": L.layerGroup(nationalMemorialsCircles),
+    "National Recreation Areas": L.layerGroup(nationalRecreationCircles)
 };
 
 // Create the map object with streetmap and national parks on as standard
@@ -156,5 +195,36 @@ let myMap = L.map("map", {
     layers: [streetMap, L.layerGroup(nationalParkCircles)]
 });
 
+
 //Add the layer options
 L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(myMap);
+
+// // Adding a legend.
+// var legend = L.control({
+//     position: "bottomright"
+//   });
+
+//   legend.onAdd = function () {
+//     var div = L.DomUtil.create("div", "info legend");
+
+//     var grades = ["National Parks", "National Monuments", "National Historic Sites", "National Memorials", "All National Lands"];
+//     var colors = [
+//       "green",
+//       "brown",
+//       "blue",
+//       "purple",
+//       "gray"];
+
+//     // Loop through our intervals and generate a label with a colored square for each interval.
+//     for (var i = 0; i < grades.length; i++) {
+//       div.innerHTML += "<i style='background: "
+//         + colors[i]
+//         + "'></i> "
+//         + grades[i]
+//         + "<br>";
+//     //    + ("<br>" : "");
+//     }
+//     return div;
+//   };
+
+//   legend.addTo(myMap);
