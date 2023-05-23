@@ -1,49 +1,209 @@
-console.log(data)
+// Define the list of possible park Designations
 
-let dropdownMenu = d3.select("#selDataset2");
+let parkDesignations = ['National Park', 'National Historical Park', 'National Monument',
+'National Historic Site', 'National Recreation Area',
+'National Battlefield', 'National Lakeshore', 'National Memorial',
+'National Seashore', 'National Preserve', 'National River', 'Park',
+'National Military Park', 'National Park & Preserve', 'Memorial',
+'National Monument and Historic Shrine', 'Memorial Parkway',
+'National Battlefield Park', 'National Recreational River',
+'National Scenic River', 'Wild & Scenic River',
+'National Monument & Preserve',
+'National Historical Park and Ecological Preserve',
+'Ecological & Historic Preserve', 'Scenic & Recreational River']
 
-//for each item in data
-for (i =0; i < data.length; i++) {
+// Create the two drop down menus.
+// The first one will store the list of park designations.
+// The second one will store the list of park names that match those designations
+
+let dropdownTypeMenu = d3.select("#selDataset");
+
+//for each item in parkDesignations list
+for (i =0; i < parkDesignations.length; i++) {
 
     //Create the option element
-    let newOption = document.createElement("option");
+    let newOptionType = document.createElement("option");
 
     //Append the text and the value
-    newOption.text = data[i].parkName;
-    newOption.value = data[i].parkName;
+    newOptionType.text = parkDesignations[i];
+    newOptionType.value = parkDesignations[i];
 
     //Append this as a child function into the list
-    dropdownMenu.node().appendChild(newOption);
-};
-
-let monthlyVisitors = data.map((item) => item.monthlyVisitors)
-console.log(monthlyVisitors[0])
-
-let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-console.log(months)
-
-// Get the trace information ready for plotting
- let Trace1 = {
- x: months,
- y: monthlyVisitors[0],
- type: "line",
- //text: monthlyVisitors[0]
-};
-
-// Data array
-let lineGraphData = [Trace1];
-
-// Apply titles to the layout
-let layout = {
-    title: `Visitors Per Month at ${data[0].parkName}`,
-    xaxis: {title: "Month"},
-    yaxis: {title: "Number of Visitors"}
+    dropdownTypeMenu.node().appendChild(newOptionType);
 };
 
 
 
-// Render the plot to the div tag with id "bar" since that's the name in the html file
-Plotly.newPlot("bar", lineGraphData, layout);  
+
+// Create an init function, which will populate the page with the first National Park (Acadia)'s data
+
+function init() {
+
+// Populate the second drop down list to show only National Parks when initialized
+
+    // Create a function to only select designations = "National Park"
+    function selectNationalParks(park) {
+        return park.parkDesignation == "National Park";
+    }
+
+    // Create a variable to only store these parks
+    let initDropdownParks = data.filter(selectNationalParks);
+
+    //Select the second drop down
+    let dropdownParkMenu = d3.select("#selDataset2");
+
+    //for each item in the National Parks list:
+    for (i = 0; i < initDropdownParks.length; i++) {
+
+        // Create the element
+        let newOptionPark = document.createElement("option");
+
+        console.log(initDropdownParks[i].parkName)
+
+        //Append the text and the value
+        newOptionPark.text = initDropdownParks[i].parkName;
+        newOptionPark.value = initDropdownParks[i].parkName;
+
+        // Add the new item to the second drop down
+        dropdownParkMenu.node().appendChild(newOptionPark);
+
+
+    };
+
+    // Initalize with Acadia information
+    function selectAcadia(park) {
+        return park.parkName == "Acadia NP";
+    }
+
+    // Store only the Acadia Data
+    let acadiaData = data.filter(selectAcadia);
+
+    // Set monthly visitors (an array of a single array) to a variable
+    let monthlyVisitors = acadiaData.map((item) => item.monthlyVisitors)
+
+    // Define months for plotting bar graph
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+    // Get the trace information ready for plotting the monthly visitors graph
+    let Trace1 = {
+    x: months,
+    y: monthlyVisitors[0],
+    type: "line",
+    //text: monthlyVisitors[0]
+    };
+
+    // Data array
+    let lineGraphData = [Trace1];
+
+    // Apply titles to the layout
+    let layout = {
+        title: `Visitors Per Month at <br><b> ${acadiaData[0].parkName}</b><br>(2022)`,
+        xaxis: {title: "Month"},
+        yaxis: {title: "Number of Visitors"}
+    };
+
+    // Render the plot to the div tag with id "bar" since that's the name in the html file
+    Plotly.newPlot("bar", lineGraphData, layout);  
+
+    // Creating the Gauge Plot
+    console.log(acadiaData)
+    var gaugeData = [
+        {
+            domain: { x: [0, 0.5], y: [0.4, 1.0] },
+            value: acadiaData[0].yelpRating,
+            title: { text: `Yelp Rating for <br><b>${acadiaData[0].parkName}</b>` },
+            type: "indicator",
+            mode: "gauge+number",
+            gauge: {
+                axis: { range: [null, 5] },
+                bar: { color: "rgba(0, 0, 255, 0.5)", thickness: 0.3},
+                //marker: { color: 'rgb(255,130,189)'},
+                steps: [
+                { range: [0, 1], color: "rgb(255, 113, 113)"},
+                { range: [1, 2], color: "rgb(244, 177, 131)" },
+                { range: [2, 3], color: "rgb(255, 230, 153)" },
+                { range: [3, 4], color: "rgb(197, 224, 180)" },
+                { range: [4, 5], color: "rgb(145, 196, 110)" }
+                ]
+            }
+        }
+    ];
+    
+    var layout3 = { width: 600, height: 500, margin: { t: 0, b: 0 }};
+    Plotly.newPlot('gauge', gaugeData, layout3);
+
+    //Appending data to the Park Info section
+
+    d3.select("#sample-metadata").html(`Park: <b>${acadiaData[0].parkName}</b> <br>
+                                        Total Visitors in 2022: <b>${acadiaData[0].total2022Visitors}</b> <br>`);
+
+
+};
+
+
+// When the first Drop Down Menu (#selDataset) is changed, then run the function "updateDropdown"
+// This will populate the second drop down list with parks that match the designation selected
+
+d3.selectAll("#selDataset").on("change", updateDropdown);
+
+// Defining the function updateDropdown
+function updateDropdown(){
+
+    //Select the dropdownmenu
+    let dropdownMenu1 = d3.select("#selDataset");
+
+
+    //Store the chosen initialized individual as a variable.
+    let selectedDesignation = dropdownMenu1.property("value")
+
+    console.log(selectedDesignation)
+
+    // Search for parks with that designation
+    function selectDesignation(park) {
+        return park.parkDesignation == selectedDesignation;
+    }
+
+    // Create a variable to store the parks for that designation
+    let dropdownParks = data.filter(selectDesignation);
+
+    console.log(dropdownParks)
+
+    // Select the second dropdown menu
+    let dropdownParkMenu = d3.select("#selDataset2");
+
+    // Clear existing options
+    dropdownParkMenu.html("");
+
+    //for each item in dropdownParks list
+    for (i =0; i < dropdownParks.length; i++) {
+
+        //Create the option element
+        let newOptionPark = document.createElement("option");
+
+        //Append the text and the value
+        newOptionPark.text = dropdownParks[i].parkName;
+        newOptionPark.value = dropdownParks[i].parkName;
+
+        //Append this as a child function into the list
+        dropdownParkMenu.node().appendChild(newOptionPark);
+    };
+
+};
+
+// When the second Drop Down Menu (#selDataset2) is changed, then run the function "updateGraphs"
+// This will change all the graphs based on what was selected.
+d3.selectAll("#selDataset2").on("change", updateGraphs);
+
+// Defining the function updateGraphs
+function updateGraphs(){
+
+};
+
+//Run the init function regardless of whether anything is clicked.
+init();
+
+
+
 
 //     ///// ADDING ALL THE NAMES TO THE HTML FILE: /////
 
