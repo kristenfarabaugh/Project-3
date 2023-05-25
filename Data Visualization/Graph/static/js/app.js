@@ -155,6 +155,46 @@ function init() {
                                         National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i>`);
 
 
+    // Plotting a scatter plot in the init function that takes all park info and plots it
+
+    // Set monthly visitors (an array of a single array) to a variable
+    let parkVisitors2022 = data.map((item) => item.totalVisitors2022);
+    let yelpRatings = data.map((item) => item.yelpRating);
+    let parkName = data.map((item) => item.parkName);
+
+    // Define the data trace
+    let scatterTrace = {
+        x: parkVisitors2022,
+        y: yelpRatings,
+        mode: 'markers',
+        type: 'scatter',
+        text: parkName.map((name, index) => `Park: ${name}<br>Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
+        //hoverinfo: parkName
+    };
+    
+    // Define the layout options
+    let scatterLayout = {
+        title: `<b>Are there any Hidden Gems?</b><br>
+                <br>Visitor Numbers and Yelp Ratings
+                <br><i>for NPS properties with fewer than 1,000,000 visitors in 2022</i>`,
+        xaxis: {
+            title: 'Number of visitors (2022)',
+            range: [0, 1000000]
+        },
+        yaxis: {
+            title: 'Yelp Rating',
+            range: [0, 5.5]
+        }
+    };
+    
+    // Create a data array
+    var scatterData = [scatterTrace];
+    
+    // Plot the scatter plot
+    Plotly.newPlot('bubble', scatterData, scatterLayout);
+
+  
+  
 };
 
 //
@@ -204,6 +244,44 @@ function updateDropdown(){
         //Append this as a child function into the list
         dropdownParkMenu.node().appendChild(newOptionPark);
     };
+
+        // Plotting a scatter plot in the init function that takes all park info and plots it
+
+    // Set monthly visitors (an array of a single array) to a variable
+    let parkVisitors2022 = dropdownParks.map((item) => item.totalVisitors2022);
+    let yelpRatings = dropdownParks.map((item) => item.yelpRating);
+    let parkName = dropdownParks.map((item) => item.parkName);
+
+    // Define the data trace
+    let scatterTrace = {
+        x: parkVisitors2022,
+        y: yelpRatings,
+        mode: 'markers',
+        type: 'scatter',
+        text: parkName.map((name, index) => `Park: ${name}<br>Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
+        //hoverinfo: parkName
+    };
+    
+    // Define the layout options
+    let scatterLayout = {
+        title: `<b>Are there any Hidden Gems?</b><br>
+                <br>Visitor Numbers and Yelp Ratings
+                <br><i>for ${selectedDesignation}s with fewer than 1,000,000 visitors in 2022</i>`,
+        xaxis: {
+            title: 'Number of visitors (2022)',
+            range: [0, 1000000]
+        },
+        yaxis: {
+            title: 'Yelp Rating',
+            range: [0, 5.5]
+        }
+    };
+    
+    // Create a data array
+    var scatterData = [scatterTrace];
+    
+    // Plot the scatter plot
+    Plotly.newPlot('bubble', scatterData, scatterLayout);
 
 };
 
@@ -306,6 +384,7 @@ function updateGraphs(){
                                         <br>
                                         <i>Please be aware that some of these monthly visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail. <br>
                                         National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i>`);
+
 
 };
 
