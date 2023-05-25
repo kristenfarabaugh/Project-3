@@ -15,9 +15,13 @@ let parkDesignations = ['National Park', 'National Historical Park', 'National M
 // Define months for plotting bar graph
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
+//Create a copy of the data to sort by visitor number
+// (This leaves the original data in alphabetical order for the dropdowns)
+let dataCopy = data.slice(); // Create a copy of the data array
+
 // Sort the parks by most visited (2022) for use later
-let parksSortedByVisitors = data.sort(function(a, b) {
-    return b.total2022Visitors - a.total2022Visitors;
+let parksSortedByVisitors = dataCopy.sort(function(a, b) {
+    return b.totalVisitors2022 - a.totalVisitors2022;
 });
 
 
@@ -144,14 +148,16 @@ function init() {
 
     // Update the text box with the park info
     d3.select("#park-info").html(`Park: <b>${acadiaData[0].parkName}</b> <br>
-                                        Total Visitors in 2022: <b>${acadiaData[0].total2022Visitors.toLocaleString()}</b> <br>
+                                        Total Visitors in 2022: <b>${acadiaData[0].totalVisitors2022.toLocaleString()}</b> <br>
                                         Most visited NPS property ranking: <br><b>${parkIndex + 1} out of ${parksSortedByVisitors.length}</b><br>
                                         <br>
-                                        <i>Please be aware that some of these visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail.</i>`);
+                                        <i>Please be aware that some of these monthly visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail. <br>
+                                        National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i>`);
 
 
 };
 
+//
 
 // When the first Drop Down Menu (#selDataset) is changed, then run the function "updateDropdown"
 // This will populate the second drop down list with parks that match the designation selected
@@ -295,10 +301,11 @@ function updateGraphs(){
 
     // Update the text box with the park info
     d3.select("#park-info").html(`Park: <b>${chosenPark[0].parkName}</b> <br>
-                                        Total Visitors in 2022: <b>${chosenPark[0].total2022Visitors.toLocaleString()}</b> <br>
+                                        Total Visitors in 2022: <b>${chosenPark[0].totalVisitors2022.toLocaleString()}</b> <br>
                                         Most visited NPS property ranking: <br><b>${parkIndex + 1} out of ${parksSortedByVisitors.length}</b><br>
                                         <br>
-                                        <i>Please be aware that some of these visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail.</i>`);
+                                        <i>Please be aware that some of these monthly visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail. <br>
+                                        National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i>`);
 
 };
 
