@@ -1,393 +1,307 @@
-console.log(data)
+// Define the list of possible park Designations
 
-let dropdownMenu = d3.select("selDataset");
+let parkDesignations = ['National Park', 'National Historical Park', 'National Monument',
+'National Historic Site', 'National Recreation Area',
+'National Battlefield', 'National Lakeshore', 'National Memorial',
+'National Seashore', 'National Preserve', 'National River', 'Park',
+'National Military Park', 'National Park & Preserve', 'Memorial',
+'National Monument and Historic Shrine', 'Memorial Parkway',
+'National Battlefield Park', 'National Recreational River',
+'National Scenic River', 'Wild & Scenic River',
+'National Monument & Preserve',
+'National Historical Park and Ecological Preserve',
+'Ecological & Historic Preserve', 'Scenic & Recreational River']
 
-//for each item in data
-for (i =0; i < data.length; i++) {
+// Define months for plotting bar graph
+let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+// Sort the parks by most visited (2022) for use later
+let parksSortedByVisitors = data.sort(function(a, b) {
+    return b.total2022Visitors - a.total2022Visitors;
+});
+
+
+// Create the first dropdown menu
+// This one will store the list of park designations.
+// The second one, added later, will store the list of park names that match those designations
+
+let dropdownTypeMenu = d3.select("#selDataset");
+
+//for each item in parkDesignations list
+for (i =0; i < parkDesignations.length; i++) {
 
     //Create the option element
-    let newOption = document.createElement("option");
+    let newOptionType = document.createElement("option");
 
     //Append the text and the value
-    newOption.text = data[i].parkName;
-    newOption.value = data[i].parkName;
-
-    console.log(newOption)
+    newOptionType.text = parkDesignations[i];
+    newOptionType.value = parkDesignations[i];
 
     //Append this as a child function into the list
-    dropdownMenu.node().appendChild(newOption);
-};
-
-let monthlyVisitors = data.map((item) => item.monthlyVisitors)
-console.log(monthlyVisitors[0])
-
-let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-console.log(months)
-
-// Get the trace information ready for plotting
- let Trace1 = {
- x: months,
- y: monthlyVisitors[0],
- type: "bar",
- //text: monthlyVisitors[0]
-};
-
-// Data array
-let barGraphData = [Trace1];
-
-// Apply titles to the layout
-let layout = {
-    title: `Visitors Per Month at ${data[0].parkName}`,
-    xaxis: {title: "Month"},
-    yaxis: {title: "Number of Visitors"}
+    dropdownTypeMenu.node().appendChild(newOptionType);
 };
 
 
+// Create an init function, which will populate the page with the first National Park (Acadia)'s data
 
-// Render the plot to the div tag with id "bar" since that's the name in the html file
-Plotly.newPlot("bar", barGraphData, layout);  
+function init() {
 
-//     ///// ADDING ALL THE NAMES TO THE HTML FILE: /////
+// Populate the second drop down list to show only National Parks when initialized
 
-//     // select the dropdown list using D3.js
-//     let dropdownMenu = d3.select("#selDataset");
+    // Create a function to only select designations = "National Park"
+    function selectNationalParks(park) {
+        return park.parkDesignation == "National Park";
+    }
+
+    // Create a variable to only store these parks
+    let initDropdownParks = data.filter(selectNationalParks);
+
+    //Select the second drop down
+    let dropdownParkMenu = d3.select("#selDataset2");
+
+    //for each item in the National Parks list:
+    for (i = 0; i < initDropdownParks.length; i++) {
+
+        // Create the element
+        let newOptionPark = document.createElement("option");
+
+        console.log(initDropdownParks[i].parkName)
+
+        //Append the text and the value
+        newOptionPark.text = initDropdownParks[i].parkName;
+        newOptionPark.value = initDropdownParks[i].parkName;
+
+        // Add the new item to the second drop down
+        dropdownParkMenu.node().appendChild(newOptionPark);
+
+
+    };
+
+    // Initalize with Acadia information
+    function selectAcadia(park) {
+        return park.parkName == "Acadia NP";
+    }
+
+    // Store only the Acadia Data
+    let acadiaData = data.filter(selectAcadia);
+
+    // Set monthly visitors (an array of a single array) to a variable
+    let monthlyVisitors = acadiaData.map((item) => item.monthlyVisitors)
+
+    // Get the trace information ready for plotting the monthly visitors graph
+    let Trace1 = {
+    x: months,
+    y: monthlyVisitors[0],
+    type: "line",
+    };
+
+    // Data array
+    let lineGraphData = [Trace1];
+
+    // Apply titles to the layout
+    let layout = {
+        title: `Visitors Per Month at <br><b> ${acadiaData[0].parkName}</b><br>(2022)`,
+        xaxis: {title: "Month"},
+        yaxis: {title: "Number of Visitors"}
+    };
+
+    // Render the plot to the div tag with id "bar" since that's the name in the html file
+    Plotly.newPlot("bar", lineGraphData, layout);  
+
+    // Creating the Gauge Plot
+    console.log(acadiaData)
+    var gaugeData = [
+        {
+            domain: { x: [0, 0.5], y: [0.4, 1.0] },
+            value: acadiaData[0].yelpRating,
+            title: { text: `Yelp Rating for <br><b>${acadiaData[0].parkName}</b>` },
+            type: "indicator",
+            mode: "gauge+number",
+            gauge: {
+                axis: { range: [null, 5] },
+                bar: { color: "rgba(0, 0, 255, 0.5)", thickness: 0.3},
+                //marker: { color: 'rgb(255,130,189)'},
+                steps: [
+                { range: [0, 1], color: "rgb(255, 113, 113)"},
+                { range: [1, 2], color: "rgb(244, 177, 131)" },
+                { range: [2, 3], color: "rgb(255, 230, 153)" },
+                { range: [3, 4], color: "rgb(197, 224, 180)" },
+                { range: [4, 5], color: "rgb(145, 196, 110)" }
+                ]
+            }
+        }
+    ];
     
-//     //for each item in data.names 
-//     for (i =0; i < data.names.length; i++) {
+    var layout3 = { width: 600, height: 500, margin: { t: 0, b: 0 }};
+    Plotly.newPlot('gauge', gaugeData, layout3);
 
-//         //Create the option element
-//         let newOption = document.createElement("option");
+    //Appending data to the Park Info section
 
-//         //Append the text and the value
-//         newOption.text = data.names[i];
-//         newOption.value = data.names[i];
+    // Find the index of the park in the list
+    var parkIndex = parksSortedByVisitors.findIndex(function(park) {
+        return park.parkName === acadiaData[0].parkName;
+      });
 
-//         //Append this as a child function into the list
-//         dropdownMenu.node().appendChild(newOption);
-//     };
+    // Update the text box with the park info
+    d3.select("#park-info").html(`Park: <b>${acadiaData[0].parkName}</b> <br>
+                                        Total Visitors in 2022: <b>${acadiaData[0].total2022Visitors.toLocaleString()}</b> <br>
+                                        Most visited NPS property ranking: <br><b>${parkIndex + 1} out of ${parksSortedByVisitors.length}</b><br>
+                                        <br>
+                                        <i>Please be aware that some of these visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail.</i>`);
 
-//     ///// INITIALIZING THE WEBPAGE /////
-//     // Create an initialized webpage just using the first person in the list
-//     function init() {
 
-//         //Store the chosen initialized individual (940) as a variable. This will change when the user selects, but is set for the initialization.
-//         let selectedIndividual = data.names[0]
+};
 
-//         // Searching for the specified name in the names array in the data file
-//         function selectName(names) {
-//         return names == selectedIndividual;
-//         }
 
-//         // Create a variable to store the name of the selected individual
-//         let individualName = data.names.filter(selectName)[0];
-        
-//         // Finding the metadata of the person with the specified name id 
-//         function selectPerson(metadata) {
-//         return metadata.id == individualName;
-//         }
-//         let individualMetadata = data.metadata.filter(selectPerson);
+// When the first Drop Down Menu (#selDataset) is changed, then run the function "updateDropdown"
+// This will populate the second drop down list with parks that match the designation selected
 
-//          // Searching the samples array of dictionaries for the specified name id and returning just that dictionary
-//         function selectSamples(samples) {
-//             return samples.id == individualName;
-//         }
-//         //Returning the whole dictionary of sample information and console logging it, just to check
-//         let individualSamples = data.samples.filter(selectSamples);
-//         console.log(individualSamples);
+d3.selectAll("#selDataset").on("change", updateDropdown);
 
-//         ///// COLLECTING DATA FOR BAR AND BUBBLE PLOTS /////
+// Defining the function updateDropdown
+function updateDropdown(){
 
-//         // Returning only the array containing the array of otu_ids (hence the [0])
-//         let otuIdNums = individualSamples[0].otu_ids;
-//         //Adding the label "OTU" to the start of each id number for the bar chart
-//         let otuIds = otuIdNums.map((item) => `OTU ${item}`);
-        
-//         //Selecting only the top ten for the bar chart plot
-//         //and reversing for plotly default
-//         let topTenOtuIds = otuIds.slice(0,10).reverse();
-        
-//         // Do the same as above for the sample_values in the array
-//         let sampleValues = individualSamples[0].sample_values;
-       
-//         //Selecting only the top ten for the bar chart plot and reversing
-//         let topTenSampleValues = sampleValues.slice(0,10).reverse();
-        
-//         // Finally, do the same for the otu_labels in the array
-//         let otuLabels = individualSamples[0].otu_labels;
-        
-//         //Selecting only the top ten for the bar chart plot and reversing
-//         let topTenOtuLabels = otuLabels.slice(0,10).reverse();
-       
-//         ///// PLOT THE BAR CHART /////
+    //Select the dropdownmenu
+    let dropdownMenu1 = d3.select("#selDataset");
 
-//         // Get the trace information ready for plotting
-//         let Trace1 = {
-//             x: topTenSampleValues,
-//             y: topTenOtuIds,
-//             type: "bar",
-//             text: topTenOtuLabels,
-//             orientation: 'h'
-//         };
+    //Store the chosen initialized individual as a variable.
+    let selectedDesignation = dropdownMenu1.property("value")
 
-//         // Data array
-//         let barGraphData = [Trace1];
+    console.log(selectedDesignation)
 
-//         // Apply titles to the layout
-//         let layout = {
-//             title: "Most common Microbes found in this person's belly button",
-//             xaxis: {title: "Number of Samples of Microbe"},
-//             yaxis: {title: "Microbe ID"}
-//         };
+    // Search for parks with that designation
+    function selectDesignation(park) {
+        return park.parkDesignation == selectedDesignation;
+    }
 
-//         // Render the plot to the div tag with id "bar" since that's the name in the html file
-//         Plotly.newPlot("bar", barGraphData, layout);  
+    // Create a variable to store the parks for that designation
+    let dropdownParks = data.filter(selectDesignation);
 
-//         ///// PLOT THE BUBBLE CHART /////
+    console.log(dropdownParks)
 
-//         //Define all the trace information
-//         let Trace2 = {
-//             x: otuIdNums,
-//             y: sampleValues,
-//             mode: 'markers',
-//             text: otuLabels,
-//             marker: {
-//                 color: otuIdNums,
-//                 size: sampleValues,
-//                 sizeref: 1.5
-//                 }
-//             };
+    // Select the second dropdown menu
+    let dropdownParkMenu = d3.select("#selDataset2");
 
-//         // Data array
-//         let bubbleChartData = [Trace2];
-        
-//         // Setting up the layout
-//         let bubbleLayout = {
-//             title: "All Microbes found in this person's belly button",
-//             xaxis: {title: "Mircrobe ID"},
-//             yaxis: {title: "Number of Samples of Microbe"}
-//         };
+    // Clear existing options
+    dropdownParkMenu.html("");
 
-//         // Render the plot to the div tag with id "bubble" since that's the name in the html file
-//         Plotly.newPlot("bubble", bubbleChartData, bubbleLayout);  
+    //for each item in dropdownParks list
+    for (i =0; i < dropdownParks.length; i++) {
 
-//         ///// COLLECTING DATA FOR METADATA SECTION /////
-//         let id = individualMetadata[0].id;
-//         let ethnicity = individualMetadata[0].ethnicity;
-//         let gender = individualMetadata[0].gender;
-//         let age = individualMetadata[0].age;
-//         let location = individualMetadata[0].location;
-//         let bbtype = individualMetadata[0].bbtype;
-//         let weeklyWash = individualMetadata[0].wfreq;
+        //Create the option element
+        let newOptionPark = document.createElement("option");
 
-//         //APPENDING METADATA TO THE METADATA SECTION
+        //Append the text and the value
+        newOptionPark.text = dropdownParks[i].parkName;
+        newOptionPark.value = dropdownParks[i].parkName;
 
-//         d3.select("#sample-metadata").html(`<b>id</b>: ${id} <br>
-//                                             <b>Ethnicity</b>: ${ethnicity} <br> 
-//                                             <b>Gender</b>: ${gender} <br> 
-//                                             <b>Age</b>: ${age} <br>
-//                                             <b>Location</b>: ${location} <br> 
-//                                             <b>Belly Button Type</b>: ${bbtype} <br>
-//                                             <b>Belly Button Wash Frequency</b>: ${weeklyWash}`);
-        
-//         ///// BONUS: PLOTTING THE GAUGE PLOT /////
+        //Append this as a child function into the list
+        dropdownParkMenu.node().appendChild(newOptionPark);
+    };
 
-//         var gaugeData = [
-//             {
-//                 domain: { x: [0, 1], y: [0, 1] },
-//                 value: weeklyWash,
-//                 title: { text: "Belly Button Washing Frequency" },
-//                 type: "indicator",
-//                 mode: "gauge+number",
-//                 gauge: {
-//                     axis: { range: [null, 9] },
-//                     marker: { color: 'rgb(255,130,189)',
-//                         opacity:0.02    
-//                     },
-//                     steps: [
-//                     { range: [0, 1], color: "rgb(249, 244, 236)"},
-//                     { range: [1, 2], color: "rgb(245, 242, 229)" },
-//                     { range: [2, 3], color: "rgb(234, 231, 201)" },
-//                     { range: [3, 4], color: "rgb(229, 232, 177)" },
-//                     { range: [4, 5], color: "rgb(213, 230, 153)" },
-//                     { range: [5, 6], color: "rgb(183, 205, 143)" },
-//                     { range: [6, 7], color: "rgb(139, 192, 134)" },
-//                     { range: [7, 8], color: "rgb(137, 180, 141)" },
-//                     { range: [8, 9], color: "rgb(131, 181, 137)" }
-//                     ]
-//                 }
-//             }
-//         ];
-        
-//         var layout3 = { width: 600, height: 500, margin: { t: 0, b: 0 }};
-//         Plotly.newPlot('gauge', gaugeData, layout3);
+};
 
-//         };
+// When the second Drop Down Menu (#selDataset2) is changed, then run the function "updateGraphs"
+// This will change all the graphs based on what was selected.
 
-//         // When the Drop Down Menu (#selDataset) is changed, then run the function "updatePlotly"
-//         d3.selectAll("#selDataset").on("change", updatePlotly);
 
-//         // Defining the function updatePlotly
-//         function updatePlotly(){
-        
-//         //Select the dropdownmenu
-//         let dropdownMenu = d3.select("#selDataset");
+// This function overcomes an error where the page was not updating when the first dropdown changed
+// (since this does change the parkname)
+// I'm not really sure why the timeout does work here, but I got this help from stackoverflow
+function optionChanged() {
+    setTimeout(updateGraphs, 0);
+  }
+
+// Then this runs the setTimeout, and which then runs the updateGraphs function
+d3.selectAll("#selDataset2").on("change", optionChanged);
+
+// Defining the function updateGraphs
+function updateGraphs(){
+    //Select the dropdownmenu
+    let dropdownMenu2 = d3.select("#selDataset2");
+
+    //Store the chosen initialized individual as a variable.
+    let selectedPark = dropdownMenu2.property("value")
+
+    // Search for the specific park
+    function selectPark(park) {
+        return park.parkName == selectedPark;
+    }
+
+    // Create a variable to store the selected park
+    let chosenPark = data.filter(selectPark);
+
+    console.log(chosenPark[0])
+
+    // Set monthly visitors (an array of a single array) to a variable
+    let monthlyVisitors = chosenPark.map((item) => item.monthlyVisitors)
+
+    // Get the trace information ready for plotting the monthly visitors graph
+    let Trace1 = {
+    x: months,
+    y: monthlyVisitors[0],
+    type: "line",
+    //text: monthlyVisitors[0]
+    };
+
+    // Data array
+    let lineGraphData = [Trace1];
+
+    // Apply titles to the layout
+    let layout = {
+        title: `Visitors Per Month at <br><b> ${chosenPark[0].parkName}</b><br>(2022)`,
+        xaxis: {title: "Month"},
+        yaxis: {title: "Number of Visitors"}
+    };
+
+    // Render the plot to the div tag with id "bar" since that's the name in the html file
+    Plotly.newPlot("bar", lineGraphData, layout);  
+
+    // Creating the Gauge Plot
+    console.log(chosenPark)
     
-//         //Store the chosen initialized individual as a variable.
-//         let selectedIndividual = dropdownMenu.property("value")
 
-//         // THE REMAINDER OF THIS CODE IS THE SAME AS ABOVE, EXCEPT IT RUNS FOR WHICHEVER NAME IS STORED AS "selectedIndividual"
-
-//         // Searching for a specific name in the names array in the data file
-//         function selectName(names) {
-//         return names == selectedIndividual;
-//         }
-
-//         // Create a variable to store the name of the selected individual
-//         let individualName = data.names.filter(selectName)[0];
-
-//         //Log it just to check
-//         console.log(individualName);
-
-//         // Finding the metadata of the person with the specified name id
-//         function selectPerson(metadata) {
-//         return metadata.id == individualName;
-//         }
-//         let individualMetadata = data.metadata.filter(selectPerson);
-
-//         // Searching the samples array of dictionaries for the specified name id
-//         function selectSamples(samples) {
-//             return samples.id == individualName;
-//         }
-//         //Returning the whole dictionary of sample information and console logging it
-//         let individualSamples = data.samples.filter(selectSamples);
-//         console.log(individualSamples);
-
-//         ///// COLLECTING DATA FOR BAR AND BUBBLE PLOTS /////
-
-//         // Returning only the array containing the array of otu_ids (hence the [0])
-//         let otuIdNums = individualSamples[0].otu_ids;
-//         //Adding the label "OTU" to the start of each id number for the bar chart
-//         let otuIds = otuIdNums.map((item) => `OTU ${item}`);
-        
-//         //Selecting only the top ten for the bar chart plot
-//         //and reversing for plotly default
-//         let topTenOtuIds = otuIds.slice(0,10).reverse();
-        
-//         // Do the same as above for the sample_values in the array
-//         let sampleValues = individualSamples[0].sample_values;
-        
-//         //Selecting only the top ten for the bar chart plot and reversing
-//         let topTenSampleValues = sampleValues.slice(0,10).reverse();
-        
-//         // Finally, do the same for the otu_labels in the array
-//         let otuLabels = individualSamples[0].otu_labels;
-        
-//         //Selecting only the top ten for the bar chart plot and reversing
-//         let topTenOtuLabels = otuLabels.slice(0,10).reverse();
-        
-
-//         ///// PLOT THE BAR CHART /////
-//         // Get the trace information ready for plotting
-//         let Trace1 = {
-//             x: topTenSampleValues,
-//             y: topTenOtuIds,
-//             type: "bar",
-//             text: topTenOtuLabels,
-//             orientation: 'h'
-//         };
-
-//         // Data array
-//         let barGraphData = [Trace1];
-
-//         // Apply titles to the layout
-//         let layout = {
-//             title: "Most common Microbes found in this person's belly button",
-//             xaxis: {title: "Number of Samples of Microbe"},
-//             yaxis: {title: "Microbe ID"}
-//         };
-
-//         // Render the plot to the div tag with id "bar" since that's the name in the html file
-//         Plotly.newPlot("bar", barGraphData, layout);  
-
-//         ///// PLOT THE BUBBLE CHART /////
-//         let Trace2 = {
-//             x: otuIdNums,
-//             y: sampleValues,
-//             mode: 'markers',
-//             text: otuLabels,
-//             marker: {
-//                 color: otuIdNums,
-//                 size: sampleValues,
-//                 sizeref: 1.5
-//                 }
-//             };
-
-//         // Data array
-//         let bubbleChartData = [Trace2];
-
-//         let bubbleLayout = {
-//             title: "All Microbes found in this person's belly button",
-//             xaxis: {title: "Mircrobe ID"},
-//             yaxis: {title: "Number of Samples of Microbe"}
-//         };
-
-//         // Render the plot to the div tag with id "bubble" since that's the name in the html file
-//         Plotly.newPlot("bubble", bubbleChartData, bubbleLayout);  
-
-//         ///// COLLECTING DATA FOR METADATA SECTION /////
-//         let id = individualMetadata[0].id;
-//         let ethnicity = individualMetadata[0].ethnicity;
-//         let gender = individualMetadata[0].gender;
-//         let age = individualMetadata[0].age;
-//         let location = individualMetadata[0].location;
-//         let bbtype = individualMetadata[0].bbtype;
-//         let weeklyWash = individualMetadata[0].wfreq;
-
-//         ///// APPENDING METADATA TO THE METADATA SECTION /////
-
-//         d3.select("#sample-metadata").html(`<b>id:</b> ${id} <br>
-//                                             <b>Ethnicity:</b> ${ethnicity} <br>
-//                                             <b>Gender:</b> ${gender} <br>
-//                                             <b>Age:</b> ${age} <br>
-//                                             <b>Location:</b> ${location} <br> 
-//                                             <b>Belly Button Type:</b> ${bbtype} <br>
-//                                             <b>Belly Button Wash Frequency:</b> ${weeklyWash}`);
-
-
-//         var gaugeData = [
-//             {
-//                 domain: { x: [0, 1], y: [0, 1] },
-//                 value: weeklyWash,
-//                 title: { text: "Belly Button Washing Frequency" },
-//                 type: "indicator",
-//                 mode: "gauge+number",
-//                 gauge: {
-//                     axis: { range: [null, 9] },
-//                     marker: { color: 'rgb(255,130,189)',
-//                         opacity:0.02    
-//                     },
-//                     steps: [
-//                     { range: [0, 1], color: "rgb(249, 244, 236)"},
-//                     { range: [1, 2], color: "rgb(245, 242, 229)" },
-//                     { range: [2, 3], color: "rgb(234, 231, 201)" },
-//                     { range: [3, 4], color: "rgb(229, 232, 177)" },
-//                     { range: [4, 5], color: "rgb(213, 230, 153)" },
-//                     { range: [5, 6], color: "rgb(183, 205, 143)" },
-//                     { range: [6, 7], color: "rgb(139, 192, 134)" },
-//                     { range: [7, 8], color: "rgb(137, 180, 141)" },
-//                     { range: [8, 9], color: "rgb(131, 181, 137)" }
-//                     ]
-//                 }
-//             }
-//         ];
-
-//         var layout3 = { width: 600, height: 500, margin: { t: 0, b: 0 }};
-//         Plotly.newPlot('gauge', gaugeData, layout3);
-
-//         };
+    var gaugeData = [
+        {
+            domain: { x: [0, 0.5], y: [0.4, 1.0] },
+            value: chosenPark[0].yelpRating,
+            title: { text: `Yelp Rating for <br><b>${chosenPark[0].parkName}</b>` },
+            type: "indicator",
+            mode: "gauge+number",
+            gauge: {
+                axis: { range: [null, 5] },
+                bar: { color: "rgba(0, 0, 255, 0.5)", thickness: 0.3},
+                //marker: { color: 'rgb(255,130,189)'},
+                steps: [
+                { range: [0, 1], color: "rgb(255, 113, 113)"},
+                { range: [1, 2], color: "rgb(244, 177, 131)" },
+                { range: [2, 3], color: "rgb(255, 230, 153)" },
+                { range: [3, 4], color: "rgb(197, 224, 180)" },
+                { range: [4, 5], color: "rgb(145, 196, 110)" }
+                ]
+            }
+        }
+    ];
     
-//     //Run the init function regardless of whether anything is clicked.
-//     init();
+    var layout3 = { width: 600, height: 500, margin: { t: 0, b: 0 }};
+    Plotly.newPlot('gauge', gaugeData, layout3);
 
-// });
+    //Appending data to the Park Info section
+
+    // Find the index of the park in the list
+    var parkIndex = parksSortedByVisitors.findIndex(function(park) {
+        return park.parkName === chosenPark[0].parkName;
+      });
+
+    // Update the text box with the park info
+    d3.select("#park-info").html(`Park: <b>${chosenPark[0].parkName}</b> <br>
+                                        Total Visitors in 2022: <b>${chosenPark[0].total2022Visitors.toLocaleString()}</b> <br>
+                                        Most visited NPS property ranking: <br><b>${parkIndex + 1} out of ${parksSortedByVisitors.length}</b><br>
+                                        <br>
+                                        <i>Please be aware that some of these visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail.</i>`);
+
+};
+
+//Run the init function regardless of whether anything is clicked.
+init();
 
