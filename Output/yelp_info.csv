@@ -1,0 +1,324 @@
+Name,Full Park Name,Park Code,State,Yelp Rating
+Abraham Lincoln Birthplace NHP,Abraham Lincoln Birthplace National Historical Park,abli,KY,4.0
+Acadia NP,Acadia National Park,acad,ME,5.0
+Adams NHP,Adams National Historical Park,adam,MA,4.5
+African Burial Ground NM,African Burial Ground National Monument,afbg,NY,4.5
+Agate Fossil Beds NM,Agate Fossil Beds National Monument,agfo,NE,NaN
+Alibates Flint Quarries NM,Alibates Flint Quarries National Monument,alfl,TX,NaN
+Allegheny Portage Railroad NHS,Allegheny Portage Railroad National Historic Site,alpo,PA,NaN
+Amistad NRA,Amistad National Recreation Area,amis,TX,NaN
+Andersonville NHS,Andersonville National Historic Site,ande,GA,NaN
+Andrew Johnson NHS,Andrew Johnson National Historic Site,anjo,TN,4.5
+Antietam NB,Antietam National Battlefield,anti,MD,4.5
+Apostle Islands NL,Apostle Islands National Lakeshore,apis,WI,NaN
+Appomattox Court House NHP,Appomattox Court House National Historical Park,apco,VA,5.0
+Arches NP,Arches National Park,arch,UT,4.5
+Arkansas Post NMEM,Arkansas Post National Memorial,arpo,AR,4.5
+Assateague Island NS,Assateague Island National Seashore,asis,N/A,NaN
+Aztec Ruins NM,Aztec Ruins National Monument,azru,NM,3.0
+Badlands NP,Badlands National Park,badl,SD,4.5
+Bandelier NM,Bandelier National Monument,band,NM,5.0
+Bent's Old Fort NHS,Bent's Old Fort National Historic Site,beol,CO,NaN
+Bering Land Bridge NPRES,Bering Land Bridge National Preserve,bela,AK,NaN
+Big Bend NP,Big Bend National Park,bibe,TX,4.0
+Big Cypress NPRES,Big Cypress National Preserve,bicy,FL,NaN
+Big Hole NB,Big Hole National Battlefield,biho,MT,NaN
+Big Thicket NPRES,Big Thicket National Preserve,bith,TX,4.5
+Bighorn Canyon NRA,Bighorn Canyon National Recreation Area,bica,N/A,NaN
+Biscayne NP,Biscayne National Park,bisc,FL,NaN
+Boston African American NHS,Boston African American National Historic Site,boaf,MA,4.5
+Boston NHP,Boston National Historical Park,bost,MA,4.5
+Brown v. Board of Education NHP,Brown v. Board of Education National Historical Park,brvb,KS,NaN
+Bryce Canyon NP,Bryce Canyon National Park,brca,UT,5.0
+Buck Island Reef NM,Buck Island Reef National Monument,buis,VI,4.5
+Buffalo NR,Buffalo National River,buff,AR,4.5
+Cabrillo NM,Cabrillo National Monument,cabr,CA,NaN
+Camp Nelson NM,Camp Nelson National Monument,cane,KY,NaN
+Canaveral NS,Canaveral National Seashore,cana,FL,NaN
+Cane River Creole NHP,Cane River Creole National Historical Park,cari,LA,4.0
+Canyon de Chelly NM,Canyon de Chelly National Monument,cach,AZ,4.5
+Canyonlands NP,Canyonlands National Park,cany,UT,4.5
+Cape Cod NS,Cape Cod National Seashore,caco,MA,4.5
+Cape Hatteras NS,Cape Hatteras National Seashore,caha,NC,NaN
+Cape Krusenstern NM,Cape Krusenstern National Monument,cakr,AK,NaN
+Cape Lookout NS,Cape Lookout National Seashore,calo,NC,NaN
+Capitol Reef NP,Capitol Reef National Park,care,UT,5.0
+Capulin Volcano NM,Capulin Volcano National Monument,cavo,NM,NaN
+Carl Sandburg Home NHS,Carl Sandburg Home National Historic Site,carl,NC,4.5
+Carlsbad Caverns NP,Carlsbad Caverns National Park,cave,NM,4.0
+Casa Grande Ruins NM,Casa Grande Ruins National Monument,cagr,AZ,4.0
+Castillo de San Marcos NM,Castillo de San Marcos National Monument,casa,FL,NaN
+Castle Clinton NM,Castle Clinton National Monument,cacl,NY,3.5
+Catoctin Mountain Park,Catoctin Mountain Park,cato,MD,4.0
+Cedar Breaks NM,Cedar Breaks National Monument,cebr,UT,NaN
+Chaco Culture NHP,Chaco Culture National Historical Park,chcu,NM,4.5
+Chamizal NMEM,Chamizal National Memorial,cham,TX,NaN
+Channel Islands NP,Channel Islands National Park,chis,CA,NaN
+Charles Pinckney NHS,Charles Pinckney National Historic Site,chpi,SC,4.0
+Charles Young Buffalo Soldiers NM,Charles Young Buffalo Soldiers National Monument,chyo,OH,3.5
+Chattahoochee River NRA,Chattahoochee River National Recreation Area,chat,GA,4.5
+Chesapeake & Ohio Canal NHP,Chesapeake & Ohio Canal National Historical Park,choh,N/A,3.0
+Chickamauga & Chattanooga NMP,Chickamauga & Chattanooga National Military Park,chch,N/A,NaN
+Chickasaw NRA,Chickasaw National Recreation Area,chic,OK,NaN
+Chiricahua NM,Chiricahua National Monument,chir,AZ,NaN
+Christiansted NHS,Christiansted National Historic Site,chri,VI,3.5
+Colonial NHP,Colonial National Historical Park,colo,VA,4.0
+Colorado NM,Colorado National Monument,colm,CO,4.5
+Congaree NP,Congaree National Park,cong,SC,4.5
+Coronado NMEM,Coronado National Memorial,coro,AZ,NaN
+Cowpens NB,Cowpens National Battlefield,cowp,SC,4.5
+Crater Lake NP,Crater Lake National Park,crla,OR,5.0
+Cumberland Gap NHP,Cumberland Gap National Historical Park,cuga,N/A,NaN
+Cumberland Island NS,Cumberland Island National Seashore,cuis,GA,NaN
+Curecanti NRA,Curecanti National Recreation Area,cure,CO,NaN
+Cuyahoga Valley NP,Cuyahoga Valley National Park,cuva,OH,4.5
+Dayton Aviation Heritage NHP,Dayton Aviation Heritage National Historical Park,daav,OH,4.5
+De Soto NMEM,De Soto National Memorial,deso,FL,4.5
+Death Valley NP,Death Valley National Park,deva,N/A,4.5
+Delaware Water Gap NRA,Delaware Water Gap National Recreation Area,dewa,N/A,NaN
+Denali NP & PRES,Denali National Park & Preserve,dena,AK,4.5
+Devils Tower NM,Devils Tower National Monument,deto,WY,NaN
+Dinosaur NM,Dinosaur National Monument,dino,N/A,4.0
+Dry Tortugas NP,Dry Tortugas National Park,drto,FL,NaN
+Dwight D. Eisenhower MEM,Dwight D. Eisenhower Memorial,ddem,DC,4.0
+Effigy Mounds NM,Effigy Mounds National Monument,efmo,IA,NaN
+Eisenhower NHS,Eisenhower National Historic Site,eise,PA,NaN
+El Malpais NM,El Malpais National Monument,elma,NM,4.5
+El Morro NM,El Morro National Monument,elmo,NM,NaN
+Eleanor Roosevelt NHS,Eleanor Roosevelt National Historic Site,elro,NY,4.5
+Eugene O'Neill NHS,Eugene O'Neill National Historic Site,euon,CA,NaN
+Everglades NP,Everglades National Park,ever,FL,NaN
+Federal Hall NMEM,Federal Hall National Memorial,feha,NY,4.0
+Fire Island NS,Fire Island National Seashore,fiis,NY,4.5
+First Ladies NHS,First Ladies National Historic Site,fila,OH,4.5
+Flight 93 NMEM,Flight 93 National Memorial,flni,PA,NaN
+Florissant Fossil Beds NM,Florissant Fossil Beds National Monument,flfo,CO,4.0
+Fort Bowie NHS,Fort Bowie National Historic Site,fobo,AZ,NaN
+Fort Davis NHS,Fort Davis National Historic Site,foda,TX,4.0
+Fort Donelson NB,Fort Donelson National Battlefield,fodo,N/A,NaN
+Fort Frederica NM,Fort Frederica National Monument,fofr,GA,NaN
+Fort Laramie NHS,Fort Laramie National Historic Site,fola,WY,NaN
+Fort Larned NHS,Fort Larned National Historic Site,fols,KS,5.0
+Fort Matanzas NM,Fort Matanzas National Monument,foma,FL,NaN
+Fort McHenry NM & HS,Fort McHenry National Monument and Historic Shrine,fomc,MD,4.5
+Fort Necessity NB,Fort Necessity National Battlefield,fone,PA,NaN
+Fort Point NHS,Fort Point National Historic Site,fopo,CA,4.5
+Fort Pulaski NM,Fort Pulaski National Monument,fopu,GA,NaN
+Fort Raleigh NHS,Fort Raleigh National Historic Site,fora,NC,NaN
+Fort Scott NHS,Fort Scott National Historic Site,fosc,KS,NaN
+Fort Smith NHS,Fort Smith National Historic Site,fosm,N/A,4.0
+Fort Stanwix NM,Fort Stanwix National Monument,fost,NY,NaN
+Fort Sumter and Fort Moultrie NHP,Fort Sumter and Fort Moultrie National Historical Park,fosu,SC,NaN
+Fort Union NM,Fort Union National Monument,foun,NM,NaN
+Fort Union Trading Post NHS,Fort Union Trading Post National Historic Site,fous,N/A,4.5
+Fort Vancouver NHS,Fort Vancouver National Historic Site,fova,N/A,4.5
+Fort Washington Park,Fort Washington Park,fowa,MD,4.0
+Fossil Butte NM,Fossil Butte National Monument,fobu,WY,NaN
+Franklin Delano Roosevelt MEM,Franklin Delano Roosevelt Memorial,frde,DC,4.5
+Frederick Douglass NHS,Frederick Douglass National Historic Site,frdo,DC,4.5
+Frederick Law Olmsted NHS,Frederick Law Olmsted National Historic Site,frla,MA,4.0
+Fredericksburg & Spotsylvania NMP,Fredericksburg & Spotsylvania National Military Park,frsp,VA,4.0
+Friendship Hill NHS,Friendship Hill National Historic Site,frhi,PA,4.0
+Gateway Arch NP,Gateway Arch National Park,jeff,MO,4.5
+Gateway NRA,Gateway National Recreation Area,gate,N/A,5.0
+Gauley River NRA,Gauley River National Recreation Area,gari,WV,4.0
+General Grant NMEM,General Grant National Memorial,gegr,NY,4.5
+George Rogers Clark NHP,George Rogers Clark National Historical Park,gero,IN,4.5
+George Washington Birthplace NM,George Washington Birthplace National Monument,gewa,VA,NaN
+George Washington Carver NM,George Washington Carver National Monument,gwca,MO,NaN
+George Washington MEM PKWY,George Washington Memorial Parkway,gwmp,N/A,NaN
+Gettysburg NMP,Gettysburg National Military Park,gett,PA,4.5
+Gila Cliff Dwellings NM,Gila Cliff Dwellings National Monument,gicl,NM,NaN
+Glacier Bay NP & PRES,Glacier Bay National Park & Preserve,glba,AK,4.0
+Glacier NP,Glacier National Park,glac,MT,4.5
+Glen Canyon NRA,Glen Canyon National Recreation Area,glca,N/A,4.5
+Golden Gate NRA,Golden Gate National Recreation Area,goga,CA,4.5
+Golden Spike NHP,Golden Spike National Historical Park,gosp,UT,4.5
+Grand Canyon NP,Grand Canyon National Park,grca,AZ,4.5
+Grand Portage NM,Grand Portage National Monument,grpo,MN,NaN
+Grand Teton NP,Grand Teton National Park,grte,WY,NaN
+Grant-Kohrs Ranch NHS,Grant-Kohrs Ranch National Historic Site,grko,MT,NaN
+Great Basin NP,Great Basin National Park,grba,NV,4.0
+Great Sand Dunes NP & PRES,Great Sand Dunes National Park & Preserve,grsa,CO,NaN
+Great Smoky Mountains NP,Great Smoky Mountains National Park,grsm,N/A,4.0
+Greenbelt Park,Greenbelt Park,gree,MD,3.5
+Guadalupe Mountains NP,Guadalupe Mountains National Park,gumo,TX,NaN
+Guilford Courthouse NMP,Guilford Courthouse National Military Park,guco,NC,4.5
+Gulf Islands NS,Gulf Islands National Seashore,guis,N/A,4.5
+Hagerman Fossil Beds NM,Hagerman Fossil Beds National Monument,hafo,ID,NaN
+Hamilton Grange NMEM,Hamilton Grange National Memorial,hagr,NY,4.0
+Hampton NHS,Hampton National Historic Site,hamp,MD,4.0
+Harpers Ferry NHP,Harpers Ferry National Historical Park,hafe,N/A,NaN
+Harry S Truman NHS,Harry S Truman National Historic Site,hstr,MO,4.5
+Herbert Hoover NHS,Herbert Hoover National Historic Site,heho,IA,NaN
+Homestead NHP,Homestead National Historical Park,home,NE,4.0
+Hopewell Culture NHP,Hopewell Culture National Historical Park,hocu,OH,4.5
+Hopewell Furnace NHS,Hopewell Furnace National Historic Site,hofu,PA,4.5
+Horseshoe Bend NMP,Horseshoe Bend National Military Park,hobe,AL,5.0
+Hot Springs NP,Hot Springs National Park,hosp,AR,4.5
+Hovenweep NM,Hovenweep National Monument,hove,N/A,NaN
+Hubbell Trading Post NHS,Hubbell Trading Post National Historic Site,hutr,AZ,4.5
+Independence NHP,Independence National Historical Park,inde,PA,4.5
+Indiana Dunes NP,Indiana Dunes National Park,indu,IN,4.5
+Jewel Cave NM,Jewel Cave National Monument,jeca,SD,NaN
+Jimmy Carter NHP,Jimmy Carter National Historical Park,jica,GA,4.5
+John Day Fossil Beds NM,John Day Fossil Beds National Monument,joda,OR,5.0
+John Muir NHS,John Muir National Historic Site,jomu,CA,4.5
+Johnstown Flood NMEM,Johnstown Flood National Memorial,jofl,PA,NaN
+Joshua Tree NP,Joshua Tree National Park,jotr,CA,5.0
+Kalaupapa NHP,Kalaupapa National Historical Park,kala,HI,5.0
+Katahdin Woods and Waters NM,Katahdin Woods and Waters National Monument,kaww,ME,3.0
+Katmai NP & PRES,Katmai National Park & Preserve,katm,AK,5.0
+Kenai Fjords NP,Kenai Fjords National Park,kefj,AK,5.0
+Kennesaw Mountain NBP,Kennesaw Mountain National Battlefield Park,kemo,GA,4.5
+Keweenaw NHP,Keweenaw National Historical Park,kewe,MI,NaN
+Kings Mountain NMP,Kings Mountain National Military Park,kimo,SC,4.5
+Knife River Indian Villages NHS,Knife River Indian Villages National Historic Site,knri,ND,NaN
+Kobuk Valley NP,Kobuk Valley National Park,kova,AK,NaN
+Korean War Veterans Memorial,Korean War Veterans Memorial,kowa,DC,4.5
+Lake Mead NRA,Lake Mead National Recreation Area,lake,N/A,NaN
+Lake Meredith NRA,Lake Meredith National Recreation Area,lamr,TX,NaN
+Lake Roosevelt NRA,Lake Roosevelt National Recreation Area,laro,WA,4.5
+Lassen Volcanic NP,Lassen Volcanic National Park,lavo,CA,4.0
+Lava Beds NM,Lava Beds National Monument,labe,CA,NaN
+LBJ Memorial Grove on the Potomac,LBJ Memorial Grove on the Potomac,lyba,DC,4.5
+Lincoln Boyhood NMEM,Lincoln Boyhood National Memorial,libo,IN,NaN
+Lincoln Home NHS,Lincoln Home National Historic Site,liho,IL,4.5
+Lincoln Memorial,Lincoln Memorial,linc,DC,5.0
+Little Bighorn Battlefield NM,Little Bighorn Battlefield National Monument,libi,MT,NaN
+Little River Canyon NPRES,Little River Canyon National Preserve,liri,AL,4.5
+Little Rock Central High School NHS,Little Rock Central High School National Historic Site,chsc,AR,5.0
+Longfellow House Washington's HQ NHS,Longfellow House Washington's Headquarters National Historic Site,long,MA,NaN
+Lowell NHP,Lowell National Historical Park,lowe,MA,5.0
+Mammoth Cave NP,Mammoth Cave National Park,maca,KY,4.5
+Manassas NBP,Manassas National Battlefield Park,mana,VA,5.0
+Manhattan Project NHP,Manhattan Project National Historical Park,mapr,N/A,4.5
+Manzanar NHS,Manzanar National Historic Site,manz,CA,5.0
+"Martin Luther King, Jr. Memorial","Martin Luther King, Jr. Memorial",mlkm,DC,4.5
+"Martin Luther King, Jr. NHP","Martin Luther King, Jr. National Historical Park",malu,GA,4.5
+Martin Van Buren NHS,Martin Van Buren National Historic Site,mava,NY,NaN
+Medgar and Myrlie Evers Home NM,Medgar and Myrlie Evers Home National Monument,memy,MS,NaN
+Mesa Verde NP,Mesa Verde National Park,meve,CO,4.5
+Minidoka NHS,Minidoka National Historic Site,miin,N/A,NaN
+Minute Man NHP,Minute Man National Historical Park,mima,MA,4.5
+Minuteman Missile NHS,Minuteman Missile National Historic Site,mimi,SD,NaN
+Missouri NRR,Missouri National Recreational River,mnrr,N/A,NaN
+Mojave NPRES,Mojave National Preserve,moja,CA,NaN
+Monocacy NB,Monocacy National Battlefield,mono,MD,4.5
+Montezuma Castle NM,Montezuma Castle National Monument,moca,AZ,4.5
+Moores Creek NB,Moores Creek National Battlefield,mocr,NC,NaN
+Morristown NHP,Morristown National Historical Park,morr,NJ,4.5
+Mount Rainier NP,Mount Rainier National Park,mora,WA,NaN
+Mount Rushmore NMEM,Mount Rushmore National Memorial,moru,SD,NaN
+Muir Woods NM,Muir Woods National Monument,muwo,CA,5.0
+Natchez NHP,Natchez National Historical Park,natc,MS,4.5
+National Park of American Samoa,National Park of American Samoa,npsa,AS,4.0
+Natural Bridges NM,Natural Bridges National Monument,nabr,UT,4.5
+Navajo NM,Navajo National Monument,nava,AZ,4.5
+New Bedford Whaling NHP,New Bedford Whaling National Historical Park,nebe,MA,4.5
+New Orleans Jazz NHP,New Orleans Jazz National Historical Park,jazz,LA,4.0
+New River Gorge NP & PRES,New River Gorge National Park & Preserve,neri,WV,5.0
+Nez Perce NHP,Nez Perce National Historical Park,nepe,N/A,NaN
+Nicodemus NHS,Nicodemus National Historic Site,nico,KS,4.5
+Ninety Six NHS,Ninety Six National Historic Site,nisi,SC,4.5
+Niobrara NSR,Niobrara National Scenic River,niob,NE,NaN
+Noatak NPRES,Noatak National Preserve,noat,AK,NaN
+North Cascades NP,North Cascades National Park,noca,WA,4.5
+Obed W&SR,Obed Wild & Scenic River,obed,TN,NaN
+Ocmulgee Mounds NHP,Ocmulgee Mounds National Historical Park,ocmu,GA,NaN
+Olympic NP,Olympic National Park,olym,WA,4.5
+Oregon Caves NM & PRES,Oregon Caves National Monument & Preserve,orca,OR,5.0
+Organ Pipe Cactus NM,Organ Pipe Cactus National Monument,orpi,AZ,4.5
+Padre Island NS,Padre Island National Seashore,pais,TX,3.0
+Palo Alto Battlefield NHP,Palo Alto Battlefield National Historical Park,paal,TX,NaN
+Paterson Great Falls NHP,Paterson Great Falls National Historical Park,pagr,NJ,3.5
+Pea Ridge NMP,Pea Ridge National Military Park,peri,AR,4.5
+Pearl Harbor NMEM,Pearl Harbor National Memorial,valr,HI,4.5
+Pecos NHP,Pecos National Historical Park,peco,NM,5.0
+Petersburg NB,Petersburg National Battlefield,pete,VA,5.0
+Petrified Forest NP,Petrified Forest National Park,pefo,AZ,4.5
+Petroglyph NM,Petroglyph National Monument,petr,NM,4.0
+Pictured Rocks NL,Pictured Rocks National Lakeshore,piro,MI,NaN
+Pinnacles NP,Pinnacles National Park,pinn,CA,4.5
+Pipe Spring NM,Pipe Spring National Monument,pisp,AZ,4.5
+Pipestone NM,Pipestone National Monument,pipe,MN,NaN
+Piscataway Park,Piscataway Park,pisc,MD,4.0
+Point Reyes NS,Point Reyes National Seashore,pore,CA,5.0
+Port Chicago Naval Magazine NMEM,Port Chicago Naval Magazine National Memorial,poch,CA,NaN
+Prince William Forest Park,Prince William Forest Park,prwi,VA,NaN
+Rainbow Bridge NM,Rainbow Bridge National Monument,rabr,UT,NaN
+Reconstruction Era NHP,Reconstruction Era National Historical Park,reer,SC,NaN
+Richmond NBP,Richmond National Battlefield Park,rich,VA,5.0
+Rio Grande W&SR,Rio Grande Wild & Scenic River,rigr,TX,3.5
+River Raisin NBP,River Raisin National Battlefield Park,rira,MI,3.5
+Rock Creek Park,Rock Creek Park,rocr,DC,4.5
+Rocky Mountain NP,Rocky Mountain National Park,romo,CO,5.0
+Roger Williams NMEM,Roger Williams National Memorial,rowi,RI,4.0
+Russell Cave NM,Russell Cave National Monument,ruca,AL,NaN
+Sagamore Hill NHS,Sagamore Hill National Historic Site,sahi,NY,4.5
+Saguaro NP,Saguaro National Park,sagu,AZ,4.0
+Saint Paul's Church NHS,Saint Paul's Church National Historic Site,sapa,NY,4.5
+Saint-Gaudens NHP,Saint-Gaudens National Historical Park,saga,NH,5.0
+Salem Maritime NHS,Salem Maritime National Historic Site,sama,MA,4.0
+Salinas Pueblo Missions NM,Salinas Pueblo Missions National Monument,sapu,NM,4.5
+Salt River Bay NHP & Ecological Pres,Salt River Bay National Historical Park and Ecological Preserve,sari,VI,3.5
+San Antonio Missions NHP,San Antonio Missions National Historical Park,saan,TX,4.0
+San Francisco Maritime NHP,San Francisco Maritime National Historical Park,safr,CA,NaN
+San Juan Island NHP,San Juan Island National Historical Park,sajh,WA,NaN
+San Juan NHS,San Juan National Historic Site,saju,PR,4.5
+Sand Creek Massacre NHS,Sand Creek Massacre National Historic Site,sand,CO,NaN
+Santa Monica Mountains NRA,Santa Monica Mountains National Recreation Area,samo,CA,NaN
+Saratoga NHP,Saratoga National Historical Park,sara,NY,3.5
+Saugus Iron Works NHS,Saugus Iron Works National Historic Site,sair,MA,5.0
+Scotts Bluff NM,Scotts Bluff National Monument,scbl,NE,NaN
+Shenandoah NP,Shenandoah National Park,shen,VA,5.0
+Shiloh NMP,Shiloh National Military Park,shil,N/A,NaN
+Sitka NHP,Sitka National Historical Park,sitk,AK,NaN
+Sleeping Bear Dunes NL,Sleeping Bear Dunes National Lakeshore,slbe,MI,NaN
+Springfield Armory NHS,Springfield Armory National Historic Site,spar,MA,4.5
+Steamtown NHS,Steamtown National Historic Site,stea,PA,NaN
+Stones River NB,Stones River National Battlefield,stri,TN,4.5
+Sunset Crater Volcano NM,Sunset Crater Volcano National Monument,sucr,AZ,NaN
+Tallgrass Prairie NPRES,Tallgrass Prairie National Preserve,tapr,KS,NaN
+Theodore Roosevelt Birthplace NHS,Theodore Roosevelt Birthplace National Historic Site,thrb,NY,4.5
+Theodore Roosevelt Inaugural NHS,Theodore Roosevelt Inaugural National Historic Site,thri,NY,NaN
+Theodore Roosevelt Island,Theodore Roosevelt Island,this,DC,4.5
+Theodore Roosevelt NP,Theodore Roosevelt National Park,thro,ND,NaN
+Thomas Edison NHP,Thomas Edison National Historical Park,edis,NJ,4.5
+Thomas Jefferson MEM,Thomas Jefferson Memorial,thje,DC,4.5
+Thomas Stone NHS,Thomas Stone National Historic Site,thst,MD,4.5
+Timpanogos Cave NM,Timpanogos Cave National Monument,tica,UT,4.5
+Timucuan EHP,Timucuan Ecological & Historic Preserve,timu,FL,NaN
+Tonto NM,Tonto National Monument,tont,AZ,4.5
+Tule Springs Fossil Beds NM,Tule Springs Fossil Beds National Monument,tusk,NV,NaN
+Tuskegee Airmen NHS,Tuskegee Airmen National Historic Site,tuai,AL,4.5
+Tuskegee Institute NHS,Tuskegee Institute National Historic Site,tuin,AL,NaN
+Tuzigoot NM,Tuzigoot National Monument,tuzi,AZ,4.5
+Upper Delaware S&RR,Upper Delaware Scenic & Recreational River,upde,N/A,NaN
+Valles Caldera NPRES,Valles Caldera National Preserve,vall,NM,4.5
+Valley Forge NHP,Valley Forge National Historical Park,vafo,PA,4.5
+Vanderbilt Mansion NHS,Vanderbilt Mansion National Historic Site,vama,NY,4.5
+Vicksburg NMP,Vicksburg National Military Park,vick,N/A,NaN
+Vietnam Veterans MEM,Vietnam Veterans Memorial,vive,DC,5.0
+Virgin Islands NP,Virgin Islands National Park,viis,VI,4.5
+Voyageurs NP,Voyageurs National Park,voya,MN,NaN
+Waco Mammoth NM,Waco Mammoth National Monument,waco,TX,NaN
+Walnut Canyon NM,Walnut Canyon National Monument,waca,AZ,NaN
+Washington Monument,Washington Monument,wamo,DC,4.5
+Washita Battlefield NHS,Washita Battlefield National Historic Site,waba,OK,NaN
+Weir Farm NHP,Weir Farm National Historical Park,wefa,CT,4.5
+Whiskeytown NRA,Whiskeytown National Recreation Area,whis,CA,NaN
+White Sands NP,White Sands National Park,whsa,NM,4.0
+Whitman Mission NHS,Whitman Mission National Historic Site,whmi,WA,5.0
+William Howard Taft NHS,William Howard Taft National Historic Site,wiho,OH,NaN
+Wilson's Creek NB,Wilson's Creek National Battlefield,wicr,MO,NaN
+Wind Cave NP,Wind Cave National Park,wica,SD,NaN
+Wolf Trap NP for the Performing Arts,Wolf Trap National Park for the Performing Arts,wotr,VA,NaN
+Women's Rights NHP,Women's Rights National Historical Park,wori,NY,4.5
+World War I Memorial,World War I Memorial,wwim,DC,4.0
+World War II Memorial,World War II Memorial,wwii,DC,5.0
+Wright Brothers NMEM,Wright Brothers National Memorial,wrbr,NC,4.0
+Wupatki NM,Wupatki National Monument,wupa,AZ,NaN
+Yellowstone NP,Yellowstone National Park,yell,N/A,4.5
+Yosemite NP,Yosemite National Park,yose,CA,4.5
+Zion NP,Zion National Park,zion,UT,5.0
