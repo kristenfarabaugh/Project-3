@@ -152,7 +152,7 @@ function init() {
                                         Most visited NPS property ranking: <br><b>${parkIndex + 1} out of ${parksSortedByVisitors.length}</b><br>
                                         <br>
                                         <i>Please be aware that some of these monthly visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail. <br>
-                                        National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i>`);
+                                        National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i><br>`);
 
 
     // Plotting a scatter plot in the init function that takes all park info and plots it
