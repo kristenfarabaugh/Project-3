@@ -174,7 +174,7 @@ function init() {
     
     // Define the layout options
     let scatterLayout = {
-        title: `<b>Are there any Hidden Gems?</b><br>
+        title: `<b>Are there any Hidden Gems?</b>
                 <br>Visitor Numbers and Yelp Ratings
                 <br><i>for NPS properties with fewer than 1,000,000 visitors in 2022</i>`,
         xaxis: {
@@ -193,8 +193,42 @@ function init() {
     // Plot the scatter plot
     Plotly.newPlot('bubble', scatterData, scatterLayout);
 
-  
-  
+
+    // Plotting another  scatter plot in the init function that takes all park info and plots it
+    let entranceFees = data.map((item) => item.entranceFee);
+
+    // Define the data trace
+    let scatterTrace2 = {
+        x: parkVisitors2022,
+        y: entranceFees,
+        mode: 'markers',
+        type: 'scatter',
+        text: parkName.map((name, index) => `Park: ${name}<br>Entrance Fee: ${entranceFees[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
+        //hoverinfo: parkName
+    };
+    
+    // Define the layout options
+    let scatterLayout2 = {
+        title: `<b>Are there popular parks with no Fees??</b>
+                <br>Visitor Numbers and Park Fees
+                <br><i>for NPS properties with fewer than 1,000,000 visitors in 2022</i>`,
+        xaxis: {
+            title: 'Number of visitors (2022)',
+            range: [0, 1000000]
+        },
+        yaxis: {
+            title: 'Entrance Fee',
+            range: [0, 35]
+        }
+    };
+    
+    // Create a data array
+    var scatterData2 = [scatterTrace2];
+    
+    // Plot the scatter plot
+    Plotly.newPlot('bubble2', scatterData2, scatterLayout2);
+
+
 };
 
 //
@@ -282,6 +316,39 @@ function updateDropdown(){
     
     // Plot the scatter plot
     Plotly.newPlot('bubble', scatterData, scatterLayout);
+
+    let entranceFees = dropdownParks.map((item) => item.yelpRating);
+
+    // Define the data trace
+    let scatterTrace2 = {
+        x: parkVisitors2022,
+        y: entranceFees,
+        mode: 'markers',
+        type: 'scatter',
+        text: parkName.map((name, index) => `Park: ${name}<br>Entrance Fee: ${entranceFees[index]}<br>Visitors: ${parkVisitors2022[index]}`)  // Assign the hover text array
+        //hoverinfo: parkName
+    };
+    
+    // Define the layout options
+    let scatterLayout2 = {
+        title: `<b>Are there popular parks with no Fees??</b>
+                <br>Visitor Numbers and Park Fees
+                <br><i>for ${selectedDesignation}s with fewer than 1,000,000 visitors in 2022</i>`,
+        xaxis: {
+            title: 'Number of visitors (2022)',
+            range: [0, 1000000]
+        },
+        yaxis: {
+            title: 'Entrance Fee',
+            range: [0, 35]
+        }
+    };
+    
+    // Create a data array
+    var scatterData2 = [scatterTrace2];
+    
+    // Plot the scatter plot
+    Plotly.newPlot('bubble2', scatterData2, scatterLayout2);
 
 };
 
@@ -387,6 +454,7 @@ function updateGraphs(){
 
 
 };
+
 
 //Run the init function regardless of whether anything is clicked.
 init();
