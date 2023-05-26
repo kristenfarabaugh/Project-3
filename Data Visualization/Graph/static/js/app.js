@@ -118,7 +118,7 @@ function init() {
         {
             domain: { x: [0, 0.5], y: [0.4, 1.0] },
             value: acadiaData[0].yelpRating,
-            title: { text: `Yelp Rating for <br><b>${acadiaData[0].parkName}</b>` },
+            title: { text: `Average Yelp Rating for <br><b>${acadiaData[0].parkName}</b>` },
             type: "indicator",
             mode: "gauge+number",
             gauge: {
@@ -168,14 +168,14 @@ function init() {
         y: yelpRatings,
         mode: 'markers',
         type: 'scatter',
-        text: parkName.map((name, index) => `Park: ${name}<br>Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
+        text: parkName.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
         //hoverinfo: parkName
     };
     
     // Define the layout options
     let scatterLayout = {
         title: `<b>Are there any Hidden Gems?</b>
-                <br>Visitor Numbers and Yelp Ratings
+                <br>Visitor Numbers and Average Yelp Ratings
                 <br><i>for NPS properties with fewer than 1,000,000 visitors in 2022</i>`,
         xaxis: {
             title: 'Number of visitors (2022)',
@@ -228,6 +228,28 @@ function init() {
     // Plot the scatter plot
     Plotly.newPlot('bubble2', scatterData2, scatterLayout2);
 
+    // Creating a bar chart for Yelp Reviews & Visitorship per Matt's feedback - scatterplot is not the best way to visualize
+    let Trace4 = {
+        x: parkVisitors2022, 
+        y: yelpRatings,
+        type: "bar",
+        text: parkName.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`)
+        };
+    
+    
+        // Data array
+    let lineGraphData4 = [Trace4];
+    
+        // Apply titles to the layout
+    let layout4 = {
+        title: `<b>Are there any Hidden Gems?</b>
+        <br>Visitor Numbers and Average Yelp Ratings`,
+            xaxis: {title: "Number of Visitors", range: [0, 1000000]},
+            yaxis: {title: "Average Yelp Rating", range:[0, 5.0]}
+        };
+    
+        // Render the plot to the div tag with id "bar" since that's the name in the html file
+    Plotly.newPlot("bar2", lineGraphData4, layout4);  
 
 };
 
@@ -292,14 +314,14 @@ function updateDropdown(){
         y: yelpRatings,
         mode: 'markers',
         type: 'scatter',
-        text: parkName.map((name, index) => `Park: ${name}<br>Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
+        text: parkName.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
         //hoverinfo: parkName
     };
     
     // Define the layout options
     let scatterLayout = {
         title: `<b>Are there any Hidden Gems?</b><br>
-                <br>Visitor Numbers and Yelp Ratings
+                <br>Visitor Numbers and Average Yelp Ratings
                 <br><i>for ${selectedDesignation}s with fewer than 1,000,000 visitors in 2022</i>`,
         xaxis: {
             title: 'Number of visitors (2022)',
@@ -349,6 +371,27 @@ function updateDropdown(){
     
     // Plot the scatter plot
     Plotly.newPlot('bubble2', scatterData2, scatterLayout2);
+
+    let Trace4 = {
+        x: parkVisitors2022, 
+        y: yelpRatings,
+        type: "bar",
+        text: parkName.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`)
+        };
+    
+        // Data array
+    let lineGraphData4 = [Trace4];
+    
+        // Apply titles to the layout
+    let layout4 = {
+        title: `<b>Are there any Hidden Gems?</b>
+        <br>Visitor Numbers and Average Yelp Ratings`,
+        xaxis: {title: "Number of Visitors", range: [0, 1000000]},
+        yaxis: {title: "Average Yelp Rating", range:[0, 5.5]}
+        };
+    
+        // Render the plot to the div tag with id "bar" since that's the name in the html file
+    Plotly.newPlot("bar2", lineGraphData4, layout4);  
 
 };
 
@@ -416,7 +459,7 @@ function updateGraphs(){
         {
             domain: { x: [0, 0.5], y: [0.4, 1.0] },
             value: chosenPark[0].yelpRating,
-            title: { text: `Yelp Rating for <br><b>${chosenPark[0].parkName}</b>` },
+            title: { text: `Average Yelp Rating for <br><b>${chosenPark[0].parkName}</b>` },
             type: "indicator",
             mode: "gauge+number",
             gauge: {
