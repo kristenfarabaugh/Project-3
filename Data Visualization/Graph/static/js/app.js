@@ -1,5 +1,4 @@
 // Define the list of possible park Designations
-
 let parkDesignations = ['National Park', 'National Historical Park', 'National Monument',
 'National Historic Site', 'National Recreation Area',
 'National Battlefield', 'National Lakeshore', 'National Memorial',
@@ -69,8 +68,6 @@ function init() {
         // Create the element
         let newOptionPark = document.createElement("option");
 
-        console.log(initDropdownParks[i].parkName)
-
         //Append the text and the value
         newOptionPark.text = initDropdownParks[i].parkName;
         newOptionPark.value = initDropdownParks[i].parkName;
@@ -113,7 +110,6 @@ function init() {
     Plotly.newPlot("bar", lineGraphData, layout);  
 
     // Creating the Gauge Plot
-    console.log(acadiaData)
     var gaugeData = [
         {
             domain: { x: [0, 0.5], y: [0.4, 1.0] },
@@ -124,7 +120,6 @@ function init() {
             gauge: {
                 axis: { range: [null, 5] },
                 bar: { color: "rgba(0, 0, 255, 0.5)", thickness: 0.3},
-                //marker: { color: 'rgb(255,130,189)'},
                 steps: [
                 { range: [0, 1], color: "rgb(255, 113, 113)"},
                 { range: [1, 2], color: "rgb(244, 177, 131)" },
@@ -141,122 +136,84 @@ function init() {
 
     //Appending data to the Park Info section
 
-    // Find the index of the park in the list
+    // Find the index of how the park ranks in terms of visitorship park in the list
     var parkIndex = parksSortedByVisitors.findIndex(function(park) {
         return park.parkName === acadiaData[0].parkName;
       });
+      
+
 
     // Update the text box with the park info
     d3.select("#park-info").html(`Park: <b>${acadiaData[0].parkName}</b> <br>
                                         Total Visitors in 2022: <b>${acadiaData[0].totalVisitors2022.toLocaleString()}</b> <br>
+                                        Base Entrance Fee: <b> $${acadiaData[0].entranceFee}</b><br>
                                         Most visited NPS property ranking: <br><b>${parkIndex + 1} out of ${parksSortedByVisitors.length}</b><br>
                                         <br>
-                                        <i>Please be aware that some of these monthly visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail. <br>
-                                        National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i><br>`);
+                                        <i> <font size="-2">Please be aware that some of these monthly visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail. <br>
+                                        National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i></font>`);
 
 
-    // Plotting a scatter plot in the init function that takes all park info and plots it
+    // Plotting a bar graph to plot the least visited 5 star parks
+    // In the init function, this takes all park info and plots it
+
+    // Filter only for parks that have a yelp rating of 5
+    function selectHighlyRated(park) {
+        return park.yelpRating == 5.0;
+    }
+
+    let highlyRatedParks = initDropdownParks.filter(selectHighlyRated);
+
+    console.log(highlyRatedParks);
+
+    let orderedHighlyRatedParks = highlyRatedParks.sort(function compareFunction(firstNum, secondNum) {
+        return firstNum.totalVisitors2022 - secondNum.totalVisitors2022;
+    });
+
+    let leastVisitedHighlyRated = orderedHighlyRatedParks.slice(0, 10).reverse()
 
     // Set monthly visitors (an array of a single array) to a variable
-    let parkVisitors2022 = data.map((item) => item.totalVisitors2022);
-    let yelpRatings = data.map((item) => item.yelpRating);
-    let parkName = data.map((item) => item.parkName);
+    let parkVisitors2022 = leastVisitedHighlyRated.map((item) => item.totalVisitors2022);
+    let yelpRatings = leastVisitedHighlyRated.map((item) => item.yelpRating);
+    let parkNames = leastVisitedHighlyRated.map((item) => item.parkName);
 
     // Define the data trace
-    let scatterTrace = {
+    let hiddenGemsBarTrace = {
         x: parkVisitors2022,
-        y: yelpRatings,
+        y: parkNames,
         mode: 'markers',
-        type: 'scatter',
-        text: parkName.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
+        type: 'bar',
+        orientation: 'h',
+        text: parkNames.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
         //hoverinfo: parkName
     };
     
     // Define the layout options
-    let scatterLayout = {
-        title: `<b>Are there any Hidden Gems?</b>
-                <br>Visitor Numbers and Average Yelp Ratings
-                <br><i>for NPS properties with fewer than 1,000,000 visitors in 2022</i>`,
+    let hiddenGemsBarLayout = {
+        title: `<b>The Hidden Gems:</b>
+                <br>Visitor numbers for the <b>least visited National Parks</b>
+                <br>with <b>5 star Yelp Reviews</b>`,
         xaxis: {
             title: 'Number of visitors (2022)',
-            range: [0, 1000000]
         },
         yaxis: {
-            title: 'Yelp Rating',
-            range: [0, 5.5]
+            title: '',
+        },
+        margin: {
+            l: 250
         }
     };
     
     // Create a data array
-    var scatterData = [scatterTrace];
+    var hiddenGemsBarData = [hiddenGemsBarTrace];
     
     // Plot the scatter plot
-    Plotly.newPlot('bubble', scatterData, scatterLayout);
-
-
-    // Plotting another  scatter plot in the init function that takes all park info and plots it
-    let entranceFees = data.map((item) => item.entranceFee);
-
-    // Define the data trace
-    let scatterTrace2 = {
-        x: parkVisitors2022,
-        y: entranceFees,
-        mode: 'markers',
-        type: 'scatter',
-        text: parkName.map((name, index) => `Park: ${name}<br>Entrance Fee: ${entranceFees[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
-        //hoverinfo: parkName
-    };
-    
-    // Define the layout options
-    let scatterLayout2 = {
-        title: `<b>Are there popular parks with no Fees??</b>
-                <br>Visitor Numbers and Park Fees
-                <br><i>for NPS properties with fewer than 1,000,000 visitors in 2022</i>`,
-        xaxis: {
-            title: 'Number of visitors (2022)',
-            range: [0, 1000000]
-        },
-        yaxis: {
-            title: 'Entrance Fee',
-            range: [0, 35]
-        }
-    };
-    
-    // Create a data array
-    var scatterData2 = [scatterTrace2];
-    
-    // Plot the scatter plot
-    Plotly.newPlot('bubble2', scatterData2, scatterLayout2);
-
-    // Creating a bar chart for Yelp Reviews & Visitorship per Matt's feedback - scatterplot is not the best way to visualize
-    let Trace4 = {
-        x: parkVisitors2022, 
-        y: yelpRatings,
-        type: "bar",
-        text: parkName.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`)
-        };
-    
-    
-        // Data array
-    let lineGraphData4 = [Trace4];
-    
-        // Apply titles to the layout
-    let layout4 = {
-        title: `<b>Are there any Hidden Gems?</b>
-        <br>Visitor Numbers and Average Yelp Ratings`,
-            xaxis: {title: "Number of Visitors", range: [0, 1000000]},
-            yaxis: {title: "Average Yelp Rating", range:[0, 5.0]}
-        };
-    
-        // Render the plot to the div tag with id "bar" since that's the name in the html file
-    Plotly.newPlot("bar2", lineGraphData4, layout4);  
+    Plotly.newPlot('bubble', hiddenGemsBarData, hiddenGemsBarLayout);
 
 };
 
-//
-
 // When the first Drop Down Menu (#selDataset) is changed, then run the function "updateDropdown"
 // This will populate the second drop down list with parks that match the designation selected
+// It will also update the "Hidden Gems" graph for this category
 
 d3.selectAll("#selDataset").on("change", updateDropdown);
 
@@ -301,97 +258,61 @@ function updateDropdown(){
         dropdownParkMenu.node().appendChild(newOptionPark);
     };
 
-        // Plotting a scatter plot in the init function that takes all park info and plots it
+    // Plotting a bar graph to plot the least visited 5 star parks
+    // In this function, it only plots the least visited parks for this designation
+
+    // Filter only for parks that have a yelp rating of 5
+    function selectHighlyRated(park) {
+        return park.yelpRating == 5;
+    }
+
+    let highlyRatedParks = dropdownParks.filter(selectHighlyRated);
+
+    console.log(highlyRatedParks);
+
+    let orderedHighlyRatedParks = highlyRatedParks.sort(function compareFunction(firstNum, secondNum) {
+        return firstNum.totalVisitors2022 - secondNum.totalVisitors2022;
+    });
+
+    let leastVisitedHighlyRated = orderedHighlyRatedParks.slice(0, 10).reverse()
 
     // Set monthly visitors (an array of a single array) to a variable
-    let parkVisitors2022 = dropdownParks.map((item) => item.totalVisitors2022);
-    let yelpRatings = dropdownParks.map((item) => item.yelpRating);
-    let parkName = dropdownParks.map((item) => item.parkName);
+    let parkVisitors2022 = leastVisitedHighlyRated.map((item) => item.totalVisitors2022);
+    let yelpRatings = leastVisitedHighlyRated.map((item) => item.yelpRating);
+    let parkNames = leastVisitedHighlyRated.map((item) => item.parkName);
 
     // Define the data trace
-    let scatterTrace = {
+    let hiddenGemsBarTrace = {
         x: parkVisitors2022,
-        y: yelpRatings,
+        y: parkNames,
         mode: 'markers',
-        type: 'scatter',
-        text: parkName.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
+        type: 'bar',
+        orientation: 'h',
+        text: parkNames.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
         //hoverinfo: parkName
     };
     
     // Define the layout options
-    let scatterLayout = {
-        title: `<b>Are there any Hidden Gems?</b><br>
-                <br>Visitor Numbers and Average Yelp Ratings
-                <br><i>for ${selectedDesignation}s with fewer than 1,000,000 visitors in 2022</i>`,
+    let hiddenGemsBarLayout = {
+        title: `<b>The Hidden Gems:</b>
+                <br>Visitor numbers for the <b>least visited ${selectedDesignation}s</b>
+                <br>with <b>5 star Yelp Reviews</b>`,
         xaxis: {
             title: 'Number of visitors (2022)',
-            range: [0, 1000000]
         },
         yaxis: {
-            title: 'Yelp Rating',
-            range: [0, 5.5]
+            title: '',
+        },
+        margin: {
+            l: 250
         }
     };
     
     // Create a data array
-    var scatterData = [scatterTrace];
+    var hiddenGemsBarData = [hiddenGemsBarTrace];
     
-    // Plot the scatter plot
-    Plotly.newPlot('bubble', scatterData, scatterLayout);
-
-    let entranceFees = dropdownParks.map((item) => item.yelpRating);
-
-    // Define the data trace
-    let scatterTrace2 = {
-        x: parkVisitors2022,
-        y: entranceFees,
-        mode: 'markers',
-        type: 'scatter',
-        text: parkName.map((name, index) => `Park: ${name}<br>Entrance Fee: ${entranceFees[index]}<br>Visitors: ${parkVisitors2022[index]}`)  // Assign the hover text array
-        //hoverinfo: parkName
-    };
-    
-    // Define the layout options
-    let scatterLayout2 = {
-        title: `<b>Are there popular parks with no Fees??</b>
-                <br>Visitor Numbers and Park Fees
-                <br><i>for ${selectedDesignation}s with fewer than 1,000,000 visitors in 2022</i>`,
-        xaxis: {
-            title: 'Number of visitors (2022)',
-            range: [0, 1000000]
-        },
-        yaxis: {
-            title: 'Entrance Fee',
-            range: [0, 35]
-        }
-    };
-    
-    // Create a data array
-    var scatterData2 = [scatterTrace2];
-    
-    // Plot the scatter plot
-    Plotly.newPlot('bubble2', scatterData2, scatterLayout2);
-
-    let Trace4 = {
-        x: parkVisitors2022, 
-        y: yelpRatings,
-        type: "bar",
-        text: parkName.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`)
-        };
-    
-        // Data array
-    let lineGraphData4 = [Trace4];
-    
-        // Apply titles to the layout
-    let layout4 = {
-        title: `<b>Are there any Hidden Gems?</b>
-        <br>Visitor Numbers and Average Yelp Ratings`,
-        xaxis: {title: "Number of Visitors", range: [0, 1000000]},
-        yaxis: {title: "Average Yelp Rating", range:[0, 5.5]}
-        };
-    
-        // Render the plot to the div tag with id "bar" since that's the name in the html file
-    Plotly.newPlot("bar2", lineGraphData4, layout4);  
+    // Plot the bar chart
+    Plotly.newPlot('bubble', hiddenGemsBarData, hiddenGemsBarLayout);
 
 };
 
@@ -492,8 +413,8 @@ function updateGraphs(){
                                         Total Visitors in 2022: <b>${chosenPark[0].totalVisitors2022.toLocaleString()}</b> <br>
                                         Most visited NPS property ranking: <br><b>${parkIndex + 1} out of ${parksSortedByVisitors.length}</b><br>
                                         <br>
-                                        <i>Please be aware that some of these monthly visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail. <br>
-                                        National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i>`);
+                                        <i> <font size="-2">Please be aware that some of these monthly visitor numbers may be affected by natural disasters or other closures. Please see NPS.gov for more detail. <br>
+                                        <br>National Land Visitor Numbers are still not back up to their pre-COVID peaks, so make sure to go!</i></font>`);
 
 
 };
