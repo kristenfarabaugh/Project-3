@@ -16,7 +16,7 @@ let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 
 //Create a copy of the data to sort by visitor number
 // (This leaves the original data in alphabetical order for the dropdowns)
-let dataCopy = data.slice(); // Create a copy of the data array
+let dataCopy = data.slice();
 
 // Sort the parks by most visited (2022) for use later
 let parksSortedByVisitors = dataCopy.sort(function(a, b) {
@@ -183,8 +183,8 @@ function init() {
         mode: 'markers',
         type: 'bar',
         orientation: 'h',
-        text: parkNames.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
-        //hoverinfo: parkName
+        //Assign the hover text
+        text: parkNames.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) 
     };
     
     // Define the layout options
@@ -209,11 +209,59 @@ function init() {
     // Plot the scatter plot
     Plotly.newPlot('bubble', hiddenGemsBarData, hiddenGemsBarLayout);
 
+    // Filter only for parks that have no admission fee
+    function selectFreeEntrance(park) {
+        return park.entranceFee == "Free";
+    }
+
+    // Store these free parks as a variable
+    let freeParks = initDropdownParks.filter(selectFreeEntrance);
+
+    // Return in order of number of visitors
+    let orderedfreeParks = freeParks.sort(function compareFunction(firstNum, secondNum) {
+        return firstNum.totalVisitors2022 - secondNum.totalVisitors2022;
+    });
+
+    // Set monthly visitors and names of free parks to variables
+    let freeParkVisitors2022 = orderedfreeParks.map((item) => item.totalVisitors2022);
+    let freeParkNames = orderedfreeParks.map((item) => item.parkName);
+
+    // Define the data trace
+    let freeParksBarTrace = {
+        x: freeParkVisitors2022,
+        y: freeParkNames,
+        mode: 'markers',
+        type: 'bar',
+        orientation: 'h' 
+    };
+    
+    // Define the layout options
+    let freeParksBarLayout = {
+        title: `<b>Free Visits:</b>
+                <br>Visitor numbers for the <b>National Parks</b> with <b>no Entrance Fee</b>`,
+        xaxis: {
+            title: 'Number of visitors (2022)',
+        },
+        yaxis: {
+            title: '',
+        },
+        margin: {
+            l: 250
+        }
+    };
+    
+    // Create a data array
+    var freeParksBarData = [freeParksBarTrace];
+    
+    // Plot the bar chart
+    Plotly.newPlot('bar2', freeParksBarData, freeParksBarLayout);
+
+
 };
 
 // When the first Drop Down Menu (#selDataset) is changed, then run the function "updateDropdown"
 // This will populate the second drop down list with parks that match the designation selected
-// It will also update the "Hidden Gems" graph for this category
+// It will also update the "Hidden Gems" and "Free Visits" graphs for this category 
 
 d3.selectAll("#selDataset").on("change", updateDropdown);
 
@@ -243,6 +291,7 @@ function updateDropdown(){
 
     // Clear existing options
     dropdownParkMenu.html("");
+    //And replace them with the new ones
 
     //for each item in dropdownParks list
     for (i =0; i < dropdownParks.length; i++) {
@@ -259,21 +308,22 @@ function updateDropdown(){
     };
 
     // Plotting a bar graph to plot the least visited 5 star parks
-    // In this function, it only plots the least visited parks for this designation
+    // In this function, it plots the least visited parks for this designation
 
     // Filter only for parks that have a yelp rating of 5
     function selectHighlyRated(park) {
         return park.yelpRating == 5;
     }
 
+    //Assign these to a variable
     let highlyRatedParks = dropdownParks.filter(selectHighlyRated);
 
-    console.log(highlyRatedParks);
-
+    // Sort the Highly rated parks in ascending order.
     let orderedHighlyRatedParks = highlyRatedParks.sort(function compareFunction(firstNum, secondNum) {
         return firstNum.totalVisitors2022 - secondNum.totalVisitors2022;
     });
 
+    // Take the sorted version and take only the top ten least visited. Then list them in reverse order for plotly to plot them in order.
     let leastVisitedHighlyRated = orderedHighlyRatedParks.slice(0, 10).reverse()
 
     // Set monthly visitors (an array of a single array) to a variable
@@ -288,8 +338,8 @@ function updateDropdown(){
         mode: 'markers',
         type: 'bar',
         orientation: 'h',
-        text: parkNames.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`) // Assign the hover text array
-        //hoverinfo: parkName
+         // Create the hover text
+        text: parkNames.map((name, index) => `Park: ${name}<br>Average Yelp Rating: ${yelpRatings[index]}<br>Visitors: ${parkVisitors2022[index]}`)
     };
     
     // Define the layout options
@@ -313,6 +363,54 @@ function updateDropdown(){
     
     // Plot the bar chart
     Plotly.newPlot('bubble', hiddenGemsBarData, hiddenGemsBarLayout);
+
+
+    // Filter only for parks that have no admission fee
+    function selectFreeEntrance(park) {
+        return park.entranceFee == "Free";
+    }
+
+    // Store these free parks as a variable
+    let freeParks = dropdownParks.filter(selectFreeEntrance);
+
+    // Return in order of number of visitors
+    let orderedfreeParks = freeParks.sort(function compareFunction(firstNum, secondNum) {
+        return firstNum.totalVisitors2022 - secondNum.totalVisitors2022;
+    });
+
+    // Set monthly visitors and names of free parks to variables
+    let freeParkVisitors2022 = orderedfreeParks.map((item) => item.totalVisitors2022);
+    let freeParkNames = orderedfreeParks.map((item) => item.parkName);
+
+    // Define the data trace
+    let freeParksBarTrace = {
+        x: freeParkVisitors2022,
+        y: freeParkNames,
+        mode: 'markers',
+        type: 'bar',
+        orientation: 'h' 
+    };
+    
+    // Define the layout options
+    let freeParksBarLayout = {
+        title: `<b>Free Visits:</b>
+                <br>Visitor numbers for the <b>${selectedDesignation}s</b> with <b>no Entrance Fee</b>`,
+        xaxis: {
+            title: 'Number of visitors (2022)',
+        },
+        yaxis: {
+            title: '',
+        },
+        margin: {
+            l: 250
+        }
+    };
+    
+    // Create a data array
+    var freeParksBarData = [freeParksBarTrace];
+    
+    // Plot the bar chart
+    Plotly.newPlot('bar2', freeParksBarData, freeParksBarLayout);
 
 };
 
@@ -356,7 +454,6 @@ function updateGraphs(){
     x: months,
     y: monthlyVisitors[0],
     type: "line",
-    //text: monthlyVisitors[0]
     };
 
     // Data array
