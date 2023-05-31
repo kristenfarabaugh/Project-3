@@ -77,7 +77,7 @@ A user can then select All NPS properties or specific and most visited designati
 
 Another point to note from this map are that the two most visited sites of any NPS properties are actually both Recreation Areas. These are Golden Gate Recreation Area in San Francisco and Gateway Recreation Area in New Jersey, close to New York City. This is likely because these are free parks close to major cities that are also major tourism hubs.
 
-![All Properties DC](https://github.com/jonnybrammah/kristenfarabaugh/Project-3/blob/main/Output/Images%20for%20Presentation/map_all_properties_dc.png)
+![All Properties DC](https://github.com/kristenfarabaugh/Project-3/blob/main/Output/Images%20for%20Presentation/map_all_properties_dc.png)
 
 Finally, by looking at all properties on the map, you can see just how many properties there are in and around Washington D.C. This probably makes some intuitive sense if you have ever visited, because popular attractions like the Lincoln Memorial and the Washington Monument are actually under the purview of the National Parks Service. You can see that many of the circles in Washington D.C. are of a similar size (indicating similar number of visitors). Again, this makes some sense since visitors to D.C. are likely to visit many of these attractions over the same stay.
 
